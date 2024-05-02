@@ -1,0 +1,35 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('consumer_documents', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('consumer_id');
+            $table->integer('passport_number')->nullable();
+            $table->string('passport_photo', 255)->nullable();
+            $table->integer('id_number')->nullable();
+            $table->string('id_photo', 255)->nullable();
+            $table->string('birth_certificate_photo', 255)->nullable();
+            $table->string('family_card_photo', 255)->nullable();
+
+            $table->foreign('consumer_id')->on('consumers')->references('id');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('consumer_documents');
+    }
+};
