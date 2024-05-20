@@ -11,6 +11,10 @@ class Roles extends Model
     use HasFactory;
 
     protected $table = 'roles';
+    protected $fillable = [
+        'role_name'
+    ];
+    public $timestamps = false;
 
     public function userRoles(): HasMany
     {

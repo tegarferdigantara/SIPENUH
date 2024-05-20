@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('consumer_documents', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('consumer_id');
-            $table->integer('passport_number')->nullable();
+            $table->string('consumer_photo', 255)->nullable();
+            $table->string('passport_number', 8)->nullable();
             $table->string('passport_photo', 255)->nullable();
-            $table->integer('id_number')->nullable();
+            $table->string('id_number', 16)->nullable();
             $table->string('id_photo', 255)->nullable();
             $table->string('birth_certificate_photo', 255)->nullable();
             $table->string('family_card_photo', 255)->nullable();
+            $table->timestamps();
 
             $table->foreign('consumer_id')->on('consumers')->references('id');
         });

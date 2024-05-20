@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('consumers', function (Blueprint $table) {
             $table->id();
             $table->string('full_name', 255)->nullable(false);
-            $table->integer('whatsapp_number')->nullable(false);
+            $table->string('whatsapp_number', 20)->nullable(false);
             $table->string('gender', 10)->nullable(false);
             $table->string('birth_place', 50)->nullable(false);
             $table->date('birth_date')->nullable(false);
@@ -25,10 +25,11 @@ return new class extends Migration
             $table->string('province', 255)->nullable(false);
             $table->string('city', 255)->nullable(false);
             $table->string('subdistrict', 255)->nullable(false);
-            $table->integer('family_number')->nullable();
+            $table->string('family_number', 20)->nullable();
             $table->string('email', 255)->nullable();
             $table->unsignedBigInteger('umrah_package_id');
-            $table->date('registration_date')->nullable(false);
+            $table->string('registration_number', 50)->unique()->nullable(false);
+            $table->timestamps();
 
             $table->foreign('umrah_package_id')->on('umrah_packages')->references('id');
         });

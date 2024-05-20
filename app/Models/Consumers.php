@@ -29,9 +29,7 @@ class Consumers extends Model
         'subdistrict',
         'family_number',
         'email',
-        'umrah_package_id',
-        'registration_date'
-
+        'umrah_package_id'
     ];
     public $timestamps = false;
     public $incrementing = true;

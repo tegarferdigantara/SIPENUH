@@ -11,7 +11,7 @@ class UpdateConsumerDocumentsRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,15 @@ class UpdateConsumerDocumentsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            // 'id' => ['required'],
+            // 'consumer_id' => ['required'],
+            'consumer_photo' => ['nullable', 'image', 'max:2048', 'file', 'mimes:png,jpg'],
+            'passport_number' => ['nullable', 'string', 'max:8'],
+            'passport_photo' => ['nullable', 'image', 'max:2048', 'file', 'mimes:png,jpg'],
+            'id_number' => ['nullable', 'string', 'max:16', 'min:16'],
+            'id_photo' => ['nullable', 'image', 'max:2048', 'file', 'mimes:png,jpg'],
+            'birth_certificate_photo' => ['nullable', 'image', 'max:2048', 'file', 'mimes:png,jpg'],
+            'family_card_photo' => ['nullable', 'image', 'max:2048', 'file', 'mimes:png,jpg'],
         ];
     }
 }

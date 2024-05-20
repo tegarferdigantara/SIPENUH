@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('itineraries', function (Blueprint $table) {
+        Schema::create('faqs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('umrah_package_id')->nullable(false);
-            $table->date('itinerary_date')->nullable();
-            $table->text('activity')->nullable();
+            $table->string('question', 255)->nullable(false);
+            $table->text('answer')->nullable(false);
             $table->unsignedBigInteger('user_creator_id')->nullable(false);
             $table->timestamps();
 
-            $table->foreign('umrah_package_id')->on('umrah_packages')->references('id');
             $table->foreign('user_creator_id')->on('users')->references('id');
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('itineraries');
+        Schema::dropIfExists('faqs');
     }
 };

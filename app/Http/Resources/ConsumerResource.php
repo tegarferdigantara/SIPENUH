@@ -31,7 +31,7 @@ class ConsumerResource extends JsonResource
             'family_number' => $this->family_number,
             'email' => $this->email,
             'umrah_package_id' => $this->umrah_package_id,
-            'registration_date' => $this->registration_date
+            'registration_number' => $this->registration_number
         ];
     }
 }

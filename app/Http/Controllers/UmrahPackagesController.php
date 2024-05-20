@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\UmrahPackages;
 use App\Http\Requests\StoreUmrahPackagesRequest;
 use App\Http\Requests\UpdateUmrahPackagesRequest;
+use App\Http\Resources\UmrahPackageResource;
+use Illuminate\Http\JsonResponse;
 
 class UmrahPackagesController extends Controller
 {
@@ -35,9 +37,14 @@ class UmrahPackagesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(UmrahPackages $umrahPackages)
+    public function show(UmrahPackages $umrahPackages): JsonResponse
     {
-        //
+        $packages = $umrahPackages->whereNotIn('status', ['CLOSED'])->get();
+
+        // if ($packages->isEmpty()) {
+        //     return response()->json('Paket Umrah Tidak Tersedia', 200);
+        // }
+        return (UmrahPackageResource::collection($packages))->response()->setStatusCode(200);
     }
 
     /**
