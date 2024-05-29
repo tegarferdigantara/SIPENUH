@@ -1,10 +1,9 @@
 <?php
 
-use App\Http\Controllers\ConsumerDocumentsController;
-use App\Http\Controllers\ConsumersController;
+use App\Http\Controllers\ConsumerDocumentController;
+use App\Http\Controllers\ConsumerController;
 use App\Http\Controllers\FaqController;
-use App\Http\Controllers\UmrahPackagesController;
-use App\Models\UmrahPackages;
+use App\Http\Controllers\UmrahPackageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,9 +24,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::middleware('chatbot')->group(function () {
-    Route::post('/register', [ConsumersController::class, 'store']);
-    Route::post('/register/document', [ConsumerDocumentsController::class, 'store']);
-    Route::post('/register/document/{id}', [ConsumerDocumentsController::class, 'update']);
-    Route::get('/umrah-package', [UmrahPackagesController::class, 'show']);
+    Route::post('/register', [ConsumerController::class, 'store']);
+    Route::post('/register/document', [ConsumerDocumentController::class, 'store']);
+    Route::patch('/register/document/{id}', [ConsumerDocumentController::class, 'update'])->name('update-consumer-document-data');
+    Route::post('/register/document/{id}', [ConsumerDocumentController::class, 'update'])->name('post-image');
+    Route::get('/umrah-package', [UmrahPackageController::class, 'show']);
     Route::get('/faq', [FaqController::class, 'show']);
 });

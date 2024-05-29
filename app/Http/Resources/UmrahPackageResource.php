@@ -16,7 +16,7 @@ class UmrahPackageResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'package_name' => $this->package_name,
+            'name' => $this->name,
             'description' => $this->description,
             'depature_date' => $this->depature_date,
             'duration' => $this->duration,

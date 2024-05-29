@@ -45,12 +45,12 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function userRoles(): HasMany
+    public function userRole(): HasMany
     {
-        return $this->hasMany(UserRoles::class, 'user_id', 'id');
+        return $this->hasMany(UserRole::class, 'user_id', 'id');
     }
 
-    public function faqs()
+    public function faq()
     {
         return $this->hasMany(Faq::class, 'user_creator_id');
     }
