@@ -67,6 +67,7 @@ class ConsumerDocumentController extends Controller
         $package = UmrahPackage::find($document->consumer->umrah_package_id);
         $consumerName = $document->consumer->full_name ?? 'Unknown';
 
+
         $photoFields = [
             'consumer_photo',
             'passport_photo',
@@ -83,17 +84,23 @@ class ConsumerDocumentController extends Controller
             }
         }
 
-        if (is_null($document->passport_number) && is_null($document->id_number)) {
-            $document->passport_number = $data['passport_number'];
-            $document->id_number = $data['id_number'];
-        } else {
-            throw new HttpResponseException(response()->json([
-                "errors" => [
-                    'message' => [
-                        'Anda sudah mengisi data Nomor Paspor dan Nomor NIK (KTP).'
+        if (isset($data['passport_number']) || isset($data['id_number'])) {
+            if (!is_null($document->passport_number) && !is_null($document->id_number)) {
+                throw new HttpResponseException(response()->json([
+                    "errors" => [
+                        'message' => [
+                            'Anda sudah mengisi data Nomor Paspor dan Nomor NIK (KTP).'
+                        ]
                     ]
-                ]
-            ])->setStatusCode(409));
+                ])->setStatusCode(409));
+            }
+
+            if (is_null($document->passport_number)) {
+                $document->passport_number = $data['passport_number'];
+            }
+            if (is_null($document->id_number)) {
+                $document->id_number = $data['id_number'];
+            }
         }
 
         $document->save();

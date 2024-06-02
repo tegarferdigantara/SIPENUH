@@ -28,6 +28,7 @@ Route::middleware('chatbot')->group(function () {
     Route::post('/register/document', [ConsumerDocumentController::class, 'store']);
     Route::patch('/register/document/{id}', [ConsumerDocumentController::class, 'update'])->name('update-consumer-document-data');
     Route::post('/register/document/{id}', [ConsumerDocumentController::class, 'update'])->name('post-image');
-    Route::get('/umrah-package', [UmrahPackageController::class, 'show']);
+    Route::get('/umrah-packages', [UmrahPackageController::class, 'index']);
+    Route::get('/umrah-packages/{id}', [UmrahPackageController::class, 'show']);
     Route::get('/faq', [FaqController::class, 'show']);
 });

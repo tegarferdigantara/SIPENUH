@@ -6,6 +6,7 @@ use App\Models\UmrahPackage;
 use App\Http\Requests\StoreUmrahPackageRequest;
 use App\Http\Requests\UpdateUmrahPackageRequest;
 use App\Http\Resources\UmrahPackageResource;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 
 class UmrahPackageController extends Controller
@@ -15,7 +16,9 @@ class UmrahPackageController extends Controller
      */
     public function index()
     {
-        //
+        $packages = UmrahPackage::whereNotIn('status', ['CLOSED'])->get();
+
+        return (UmrahPackageResource::collection($packages))->response()->setStatusCode(200);
     }
 
     /**
@@ -37,14 +40,29 @@ class UmrahPackageController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(UmrahPackage $umrahPackage): JsonResponse
+    public function show(int $id, UmrahPackage $umrahPackage): JsonResponse
     {
-        $packages = $umrahPackage->whereNotIn('status', ['CLOSED'])->get();
+        // Check if ID is provided
 
-        // if ($packages->isEmpty()) {
-        //     return response()->json('Paket Umrah Tidak Tersedia', 200);
-        // }
-        return (UmrahPackageResource::collection($packages))->response()->setStatusCode(200);
+        $package = $umrahPackage->where('id', $id)
+            ->whereNotIn('status', ['CLOSED'])
+            ->first();
+
+        if (!$package) {
+            throw new HttpResponseException(response()->json([
+                "errors" => [
+                    'message' => [
+                        'Paket Umrah tidak ditemukan.'
+                    ]
+                ]
+            ])->setStatusCode(404));
+        }
+
+        return (new UmrahPackageResource($package))->response()->setStatusCode(200);
+
+
+        // If no ID is provided, return all packages
+
     }
 
     /**
