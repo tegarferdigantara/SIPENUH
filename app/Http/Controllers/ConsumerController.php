@@ -9,6 +9,7 @@ use App\Http\Resources\ConsumerResource;
 use App\Models\UmrahPackage;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Storage;
 
 class ConsumerController extends Controller
 {
@@ -72,6 +73,17 @@ class ConsumerController extends Controller
             ])->setStatusCode(409));
         }
 
+        if ($packageName->quota == 0) {
+            throw new HttpResponseException(response()->json([
+                "errors" => [
+                    'message' => [
+                        'Paket *' . $packageName->name . '* dengan nomor paket *' . $packageName->id . '* yang anda pilih sudah penuh.'
+                    ]
+                ]
+            ])->setStatusCode(409));
+        }
+
+
         $consumer->registration_number = $registrationNumber;
         $consumer->save();
 
@@ -105,9 +117,79 @@ class ConsumerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Consumer $consumer)
+    public function destroyByBot($registrationNumber, Consumer $consumer): JsonResponse
     {
-        //
+        // Temukan entri di tabel 'consumer' berdasarkan 'registration_number'
+        $consumerData = $consumer->with('consumerDocument')->where('registration_number', $registrationNumber)->first();
+
+        if (!$consumerData) {
+            throw new HttpResponseException(response()->json([
+                "errors" => [
+                    'message' => [
+                        'Nomor Registrasi yang anda kirim tidak tersedia.'
+                    ]
+                ]
+            ])->setStatusCode(404));
+        }
+        // Hapus entri di tabel 'consumerDocument' yang terkait dengan 'consumer'
+        $consumerData->consumerDocument()->delete();
+
+        // Hapus entri di tabel 'consumer'
+        $consumerData->delete();
+
+        return response()->json([
+            'data' => true
+        ])->setStatusCode(200);
+    }
+
+    public function destroyByUser($registrationNumber, Consumer $consumer): JsonResponse
+    {
+        // Temukan entri di tabel 'consumer' berdasarkan 'registration_number'
+        $consumerData = $consumer->with('consumerDocument')->where('registration_number', $registrationNumber)->first();
+
+        if (!$consumerData) {
+            throw new HttpResponseException(response()->json([
+                "errors" => [
+                    'message' => [
+                        'Nomor Registrasi yang anda kirim tidak tersedia.'
+                    ]
+                ]
+            ])->setStatusCode(404));
+        }
+
+        $packageName = UmrahPackage::with('consumers')->find($consumerData->umrah_package_id);
+
+        if ($consumerData->consumerDocument) {
+            $document = $consumerData->consumerDocument;
+
+            $files = [
+                'consumer_photo' => $document->consumer_photo,
+                'passport_photo' => $document->passport_photo,
+                'id_photo' => $document->id_photo,
+                'birth_certificate_photo' => $document->birth_certificate_photo,
+                'family_card_photo' => $document->family_card_photo
+            ];
+
+            foreach ($files as $file) {
+                if ($file && Storage::disk('public')->exists($file)) {
+                    Storage::disk('public')->delete($file);
+                }
+            }
+
+            // Hapus entri di tabel 'consumerDocument' yang terkait dengan 'consumer'
+            $document->delete();
+        }
+        // Hapus entri di tabel 'consumerDocument' yang terkait dengan 'consumer'
+        $consumerData->consumerDocument()->delete();
+
+        // Hapus entri di tabel 'consumer'
+        $consumerData->delete();
+
+        $packageName->increment('quota', 1);
+
+        return response()->json([
+            'data' => true
+        ])->setStatusCode(200);
     }
 
 

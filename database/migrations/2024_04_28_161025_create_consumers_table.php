@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('consumers', function (Blueprint $table) {
             $table->id();
             $table->string('full_name', 255)->nullable(false);
+            $table->string('whatsapp_number_sender', 20)->nullable(false);
             $table->string('whatsapp_number', 20)->nullable(false);
             $table->string('gender', 10)->nullable(false);
             $table->string('birth_place', 50)->nullable(false);

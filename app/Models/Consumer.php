@@ -16,6 +16,7 @@ class Consumer extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'full_name',
+        'whatsapp_number_sender',
         'whatsapp_number',
         'gender',
         'birth_place',

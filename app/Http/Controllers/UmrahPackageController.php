@@ -18,6 +18,7 @@ class UmrahPackageController extends Controller
     {
         $packages = UmrahPackage::whereNotIn('status', ['CLOSED'])->get();
 
+
         return (UmrahPackageResource::collection($packages))->response()->setStatusCode(200);
     }
 
@@ -42,8 +43,6 @@ class UmrahPackageController extends Controller
      */
     public function show(int $id, UmrahPackage $umrahPackage): JsonResponse
     {
-        // Check if ID is provided
-
         $package = $umrahPackage->where('id', $id)
             ->whereNotIn('status', ['CLOSED'])
             ->first();

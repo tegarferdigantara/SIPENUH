@@ -37,11 +37,11 @@ class ItineraryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Itinerary $itinerary): JsonResponse
+    public function show(int $umrahPackageNumber, Itinerary $itinerary): JsonResponse
     {
-        $itinerary = $itinerary->get();
+        $itineraries = $itinerary->where('umrah_package_id', $umrahPackageNumber)->with('umrahPackage')->get();
 
-        return (ItineraryResource::collection($itinerary))->response()->setStatusCode(200);
+        return ItineraryResource::collection($itineraries)->response()->setStatusCode(200);
     }
 
     /**

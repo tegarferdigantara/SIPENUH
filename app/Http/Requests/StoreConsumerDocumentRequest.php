@@ -25,9 +25,9 @@ class StoreConsumerDocumentRequest extends FormRequest
         return [
             'consumer_id' => 'required',
             'consumer_photo' => 'nullable|image|max:2048|file|mimes:png,jpg',
-            'passport_number' => 'nullable|string|max:8',
+            'passport_number' => 'nullable|string|max:8|unique:consumer_documents,passport_number' . ($this->consumer_document ? ",{$this->consumer_document->id}" : ''),
             'passport_photo' => 'nullable|image|max:2048|file|mimes:png,jpg',
-            'id_number' => 'nullable|integer|max:16|min:16',
+            'id_number' => 'nullable|integer|min:16|max:16|unique:consumer_documents,id_number' . ($this->consumer_document ? ",{$this->consumer_document->id}" : ''),
             'id_photo' => 'nullable|image|max:2048|file|mimes:png,jpg',
             'birth_certificate_photo' => 'nullable|image|max:2048|file|mimes:png,jpg',
             'family_card_photo' => 'nullable|image|max:2048|file|mimes:png,jpg',
@@ -53,10 +53,11 @@ class StoreConsumerDocumentRequest extends FormRequest
     {
         return [
             'passport_number.max' => 'Nomor Paspor tidak boleh lebih dari 8 karakter.',
-            'id_number.min' => 'Nomor NIK (KTP) harus minimal 16 karakter.',
-            'id_number.max' => 'Nomor NIK (KTP) tidak boleh lebih dari 16 karakter.',
-            'id_number.integer' => 'Nomor NIK (KTP) harus berupa bilangan bulat/angka.
-Contoh: *Nomor NIK (KTP): 1234567890123456*'
+            // 'id_number.required' => 'Nomor NIK (KTP) harus diisi.',
+            'id_number.min' => 'Nomor KTP (NIK) harus minimal 16 karakter.',
+            'id_number.max' => 'Nomor KTP (NIK) tidak boleh lebih dari 16 karakter.',
+            'id_number.integer' => 'Nomor KTP (NIK) harus berupa bilangan bulat/angka.
+Contoh: *Nomor KTP (NIK): 1234567890123456*'
         ];
     }
 }

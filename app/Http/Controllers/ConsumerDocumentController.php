@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateConsumerDocumentRequest;
 use App\Models\UmrahPackage;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 
 class ConsumerDocumentController extends Controller
 {
@@ -101,6 +102,27 @@ class ConsumerDocumentController extends Controller
             if (is_null($document->id_number)) {
                 $document->id_number = $data['id_number'];
             }
+        }
+
+        $anyPhotoFilled = false;
+        foreach ($photoFields as $photoField) {
+            if (!is_null($document->$photoField)) {
+                $anyPhotoFilled = true;
+                break;
+            }
+        }
+
+        if ($anyPhotoFilled && !is_null($document->id_number)) {
+            DB::transaction(function () use ($package) {
+                $package->decrement('quota', 1);
+                $package->refresh();
+
+                if ($package->quota == 0) {
+                    $package->status = 'FULL';
+                }
+
+                $package->save();
+            });
         }
 
         $document->save();

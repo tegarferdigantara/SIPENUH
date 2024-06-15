@@ -25,7 +25,8 @@ class StoreConsumerRequest extends FormRequest
     {
         return [
             'full_name' => 'required|string|max:255',
-            'whatsapp_number' => 'required|string|max:20',
+            'whatsapp_number_sender' => 'required|string|max:20',
+            'whatsapp_number' => 'required|string|regex:/^08[0-9]{8,11}$/',
             'gender' => 'required|string|max:10',
             'birth_place' => 'required|string|max:50',
             'birth_date' => 'required|date_format:Y-m-d', // Validasi format tanggal lahir setelah diubah
@@ -89,9 +90,13 @@ class StoreConsumerRequest extends FormRequest
             'province.required' => 'Kolom [Provinsi] pada Pendaftaran Umrah Wajib diisi.',
             'city.required' => 'Kolom [Kota] pada Pendaftaran Umrah Wajib diisi.',
             'subdistrict.required' => 'Kolom [Kecamatan] pada Pendaftaran Umrah Wajib diisi.',
-            'umrah_package_id.required' => 'Kolom [Jenis Paket Umrah] pada Pendaftaran Umrah Wajib diisi dan berupa Angka. Contoh: Jenis Paket Umrah: 20',
-            //Date Format
-            'birth_date.date_format' => 'Kolom [Tanggal Lahir] harus sesuai dengan format. Contoh: *24 September 2001*.'
+            'umrah_package_id.required' => 'Kolom [Kode Paket Umrah] pada Pendaftaran Umrah Wajib diisi dan berupa Angka. *Contoh: Kode Paket Umrah: 20*',
+            //Birth Date Validation
+            'birth_date.date_format' => 'Kolom [Tanggal Lahir] harus sesuai dengan format. Contoh: *24 September 2001*.',
+            //WhatsApp Number Validation
+            'whatsapp_number.required' => 'Kolom [Nomor HP (WhatsApp)] pada Pendaftaran Umrah Wajib diisi.',
+            'whatsapp_number.integer' => 'Nomor HP (WhatsApp) harus berupa bilangan bulat/angka.',
+            'whatsapp_number.regex' => 'Nomor HP (WhatsApp) harus dimulai dengan 08 dan memiliki panjang antara 10 hingga 13 digit setelah 08.',
         ];
     }
 }

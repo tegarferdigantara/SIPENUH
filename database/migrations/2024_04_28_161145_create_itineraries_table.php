@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('itineraries', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('umrah_package_id')->nullable(false);
-            $table->date('itinerary_date')->nullable();
+            $table->date('date')->nullable();
             $table->text('activity')->nullable();
             $table->unsignedBigInteger('user_creator_id')->nullable(false);
             $table->timestamps();

@@ -17,6 +17,7 @@ class ConsumerResource extends JsonResource
         return [
             'id' => $this->id,
             'full_name' => $this->full_name,
+            'whatsapp_number_sender' => $this->whatsapp_number_sender,
             'whatsapp_number' => $this->whatsapp_number,
             'gender' => $this->gender,
             'birth_place' => $this->birth_place,
