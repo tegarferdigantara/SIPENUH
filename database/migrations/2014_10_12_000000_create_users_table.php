@@ -16,11 +16,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('whatsapp_number', 20)->nullable();
-            $table->rememberToken();
+            $table->unsignedBigInteger('role_id');
             $table->timestamps();
+
+            $table->foreign('role_id')->on('roles')->references('id');
         });
 
         Artisan::call('db:seed', [

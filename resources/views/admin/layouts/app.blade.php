@@ -22,8 +22,21 @@
     <title>
         {{ env('APP_NAME') }}
     </title>
-    <link rel="icon" href="favicon.ico">
+    <link rel="icon" href="{{ asset('favicon.ico') }}">
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+    <!-- Include jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    {{-- Toastr Notification --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    {{-- Axios --}}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    {{-- Data Tables --}}
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css">
+
 </head>
 
 <body x-data="{ page: 'ecommerce', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }" x-init="darkMode = JSON.parse(localStorage.getItem('darkMode'));
@@ -47,7 +60,6 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
         <div class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
             <!-- ===== Header Start ===== -->
             @include('admin.components.header')
-
             <!-- ===== Header End ===== -->
 
             <!-- ===== Main Content Start ===== -->
@@ -58,6 +70,9 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
     </div>
     <!-- ===== Page Wrapper End ===== -->
     <script defer src="{{ asset('assets/js/bundle.js') }}"></script>
+    <!-- Include Fancybox library -->
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    @stack('scripts')
 </body>
 
 </html>

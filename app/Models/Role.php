@@ -12,12 +12,12 @@ class Role extends Model
 
     protected $table = 'roles';
     protected $fillable = [
-        'role_name'
+        'name'
     ];
     public $timestamps = false;
 
-    public function userRole(): HasMany
+    public function users(): HasMany
     {
-        return $this->hasMany(UserRole::class, 'role_id', 'id');
+        return $this->hasMany(User::class); // Mengubah relasi menjadi HasMany, karena satu peran (role) dapat dimiliki oleh banyak user
     }
 }

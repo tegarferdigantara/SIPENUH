@@ -31,13 +31,17 @@ class UmrahPackage extends Model
     public $timestamps = true;
     public $incrementing = true;
 
-    public function consumers(): HasOne
+    public function customers(): HasOne
     {
-        return $this->hasOne(Consumer::class, 'umrah_package_id', 'id');
+        return $this->hasOne(Customer::class, 'umrah_package_id', 'id');
     }
 
     public function itinerary(): HasMany
     {
         return $this->hasMany(Itinerary::class, 'umrah_package_id', 'id');
+    }
+    public function customerAuditLogs(): HasMany
+    {
+        return $this->hasMany(CustomerAuditLog::class, 'old_umrah_package_id', 'id');
     }
 }

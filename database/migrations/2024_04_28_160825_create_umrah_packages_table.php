@@ -22,7 +22,6 @@ return new class extends Migration
             $table->text('destination')->nullable(false);
             $table->integer('quota')->nullable(false);
             $table->enum('status', ['ACTIVE', 'FULL', 'CLOSED'])->nullable(false);
-            $table->string('image', 255)->nullable(false);
             $table->unsignedBigInteger('user_creator_id')->nullable(false);
             $table->timestamps();
 

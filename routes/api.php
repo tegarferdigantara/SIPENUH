@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\ConsumerDocumentController;
-use App\Http\Controllers\ConsumerController;
+use App\Http\Controllers\CustomerDocumentController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ItineraryController;
 use App\Http\Controllers\UmrahPackageController;
@@ -19,20 +19,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 
 Route::middleware('chatbot')->group(function () {
-    Route::post('/register', [ConsumerController::class, 'store']);
-    Route::delete('/register/bot/{registrationNumber}', [ConsumerController::class, 'destroyByBot']);
-    Route::delete('/register/user/{registrationNumber}', [ConsumerController::class, 'destroyByUser']);
-    Route::post('/register/document', [ConsumerDocumentController::class, 'store']);
-    Route::patch('/register/document/{id}', [ConsumerDocumentController::class, 'update'])->name('update-consumer-document-data');
-    Route::post('/register/document/{id}', [ConsumerDocumentController::class, 'update'])->name('post-consumer-document-image-data');
-    Route::get('/umrah-packages', [UmrahPackageController::class, 'index']);
-    Route::get('/umrah-packages/{id}', [UmrahPackageController::class, 'show']);
+    Route::post('/register', [CustomerController::class, 'store']);
+    Route::delete('/register/bot/{registrationNumber}', [CustomerController::class, 'destroyByBot']);
+    Route::delete('/register/user/{registrationNumber}', [CustomerController::class, 'destroyByUser']);
+    Route::post('/register/document', [CustomerDocumentController::class, 'store']);
+    Route::patch('/register/document/{id}', [CustomerDocumentController::class, 'update'])->name('update-customer-document-data');
+    Route::post('/register/document/{id}', [CustomerDocumentController::class, 'update'])->name('post-customer-document-image-data');
+    Route::get('/umrah-packages', [UmrahPackageController::class, 'indexApi']);
+    Route::get('/umrah-packages/{id}', [UmrahPackageController::class, 'showApi']);
     Route::get('/faq', [FaqController::class, 'show']);
     Route::get('/itineraries/{umrahPackageNumber}', [ItineraryController::class, 'show']);
 });

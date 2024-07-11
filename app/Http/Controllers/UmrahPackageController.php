@@ -16,6 +16,10 @@ class UmrahPackageController extends Controller
      */
     public function index()
     {
+    }
+
+    public function indexApi()
+    {
         $packages = UmrahPackage::whereNotIn('status', ['CLOSED'])->get();
 
 
@@ -37,11 +41,16 @@ class UmrahPackageController extends Controller
     {
         //
     }
+    //Show data for Server Side Rendering
+    public function show(int $id, UmrahPackage $umrahPackage)
+    {
+        $package = $umrahPackage->where('id', $id)->first();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(int $id, UmrahPackage $umrahPackage): JsonResponse
+        return view('admin.pages.umrah-package-manage.detail', compact('package'));
+    }
+
+    //Show data for JSON Response data
+    public function showApi(int $id, UmrahPackage $umrahPackage): JsonResponse
     {
         $package = $umrahPackage->where('id', $id)
             ->whereNotIn('status', ['CLOSED'])
@@ -58,10 +67,6 @@ class UmrahPackageController extends Controller
         }
 
         return (new UmrahPackageResource($package))->response()->setStatusCode(200);
-
-
-        // If no ID is provided, return all packages
-
     }
 
     /**

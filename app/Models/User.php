@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -23,6 +24,7 @@ class User extends Authenticatable
         'email',
         'whatsapp_number',
         'password',
+        'role_id'
     ];
 
     /**
@@ -45,9 +47,9 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function userRole(): HasMany
+    public function role(): BelongsTo
     {
-        return $this->hasMany(UserRole::class, 'user_id', 'id');
+        return $this->belongsTo(Role::class, 'role_id', 'id');
     }
 
     public function faq()
