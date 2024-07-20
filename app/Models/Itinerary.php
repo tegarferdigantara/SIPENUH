@@ -13,7 +13,8 @@ class Itinerary extends Model
     protected $table = 'itineraries';
     protected $fillable = [
         'umrah_package_id',
-        'itinerary_date',
+        'date',
+        'title',
         'activity',
         'user_creator_id'
     ];

@@ -4,26 +4,24 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class UmrahPackage extends Model
 {
     use HasFactory;
-
-
     protected $table = 'umrah_packages';
     protected $fillable = [
         'name',
         'description',
-        'depature_date',
+        'departure_date',
         'duration',
         'price',
         'facility',
         'destination',
         'quota',
         'status',
-        'image',
         'user_creator_id'
     ];
     protected $keyType = 'int';
@@ -43,5 +41,10 @@ class UmrahPackage extends Model
     public function customerAuditLogs(): HasMany
     {
         return $this->hasMany(CustomerAuditLog::class, 'old_umrah_package_id', 'id');
+    }
+
+    public function userCreator(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_creator_id', 'id');
     }
 }

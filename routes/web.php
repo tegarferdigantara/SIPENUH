@@ -6,6 +6,9 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CustomerDocumentController;
+use App\Http\Controllers\FaqController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ItineraryController;
 use App\Http\Controllers\Pdf\ManifestController;
 use App\Http\Controllers\Pdf\RekomController;
 use App\Http\Controllers\UmrahPackageController;
@@ -32,12 +35,18 @@ Route::prefix('admin')->group(function () {
     });
 
     Route::middleware('auth')->group(function () {
-        Route::get('/', function () {
-            return view('admin.pages.home');
-        })->name('admin.dashboard');
+        Route::get('/', [HomeController::class, 'index'])->name('admin.dashboard');
+        Route::get('/settings', [HomeController::class, 'setting'])->name('admin.account.setting');
 
-        Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
-        Route::post('register', [RegisteredUserController::class, 'store']);
+        Route::get('/users', [RegisteredUserController::class, 'index'])->name('admin.users.index');
+        Route::get('/users/create', [RegisteredUserController::class, 'create'])->name('admin.users.create');
+        Route::post('/users/store', [RegisteredUserController::class, 'store'])->name('admin.users.store');
+        Route::get('/users/{userId}/edit', [RegisteredUserController::class, 'edit'])->name('admin.users.edit');
+        Route::put('/users/{userId}/update', [RegisteredUserController::class, 'update'])->name('admin.users.update');
+        Route::delete('/users/{userId}/delete', [RegisteredUserController::class, 'destroy'])->name('admin.users.destroy');
+
+        // Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
+        // Route::post('register', [RegisteredUserController::class, 'store']);
 
         Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])->name('password.confirm');
         Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
@@ -49,14 +58,38 @@ Route::prefix('admin')->group(function () {
         Route::get('/jemaah-umrah/{packageId}', [CustomerController::class, 'showByPackage'])->name('admin.customer.list.by.package');
         Route::get('/jemaah-umrah/{packageId}/{customerId}', [CustomerController::class, 'showCustomer'])->name('admin.customer.detail.by.package');
         Route::get('/jemaah-umrah/{packageId}/{customerId}/edit', [CustomerController::class, 'edit'])->name('admin.customer.detail.by.package.edit');
-        Route::put('/jemaah-umrah/{packageId}/{customerId}', [CustomerController::class, 'update'])->name('admin.customer.detail.by.package.edit.post');
+        Route::put('/jemaah-umrah/{packageId}/{customerId}', [CustomerController::class, 'update'])->name('admin.customer.detail.by.package.update');
+        Route::delete('/jemaah-umrah/{registrationNumber}', [CustomerController::class, 'destroyByWebManage'])->name('admin.customer.destroy');
+
         Route::post('/jemaah-umrah/{customerId}/update-photo', [CustomerDocumentController::class, 'updatePhoto'])->name('admin.customerDocument.update.photo.post');
         Route::post('/jemaah-umrah/rotate-photo/{customerId}/{type}', [CustomerDocumentController::class, 'rotatePhoto'])->name('admin.customerDocument.rotate.photo');
 
         Route::get('/paket-umrah', function () {
             return redirect()->back();
         });
+        Route::get('/paket-umrah/tambah', [UmrahPackageController::class, 'create'])->name('admin.package.create');
+        Route::post('/paket-umrah/tambah', [UmrahPackageController::class, 'store'])->name('admin.package.store');
         Route::get('/paket-umrah/{packageId}', [UmrahPackageController::class, 'show'])->name('admin.package.show');
+        Route::get('/paket-umrah/{packageId}/edit', [UmrahPackageController::class, 'edit'])->name('admin.package.edit');
+        Route::put('/paket-umrah/{packageId}', [UmrahPackageController::class, 'update'])->name('admin.package.update');
+        Route::delete('/paket-umrah/{packageId}', [UmrahPackageController::class, 'destroy'])->name('admin.package.destroy');
+
+        Route::get('/paket-umrah/{packageId}/itinerary', function () {
+            return redirect()->back();
+        });
+
+        Route::get('/paket-umrah/{packageId}/itinerary/tambah', [ItineraryController::class, 'create'])->name('admin.package.itinerary.create');
+        Route::post('/paket-umrah/{packageId}/itinerary/tambah', [ItineraryController::class, 'store'])->name('admin.package.itinerary.store');
+        Route::get('/paket-umrah/{packageId}/itinerary/{itineraryId}/edit', [ItineraryController::class, 'edit'])->name('admin.package.itinerary.edit');
+        Route::put('/paket-umrah/{packageId}/itinerary/{itineraryId}', [ItineraryController::class, 'update'])->name('admin.package.itinerary.update');
+        Route::delete('/paket-umrah/{packageId}/itinerary/{itineraryId}', [ItineraryController::class, 'destroy'])->name('admin.package.itinerary.destroy');
+
+        Route::get('/faq', [FaqController::class, 'index'])->name('admin.faq.list');
+        Route::get('/faq/tambah', [FaqController::class, 'create'])->name('admin.faq.create');
+        Route::post('/faq/tambah', [FaqController::class, 'store'])->name('admin.faq.store');
+        Route::get('/faq/{faqId}/edit', [FaqController::class, 'edit'])->name('admin.faq.edit');
+        Route::put('/faq/{faqId}', [FaqController::class, 'update'])->name('admin.faq.update');
+        Route::delete('/faq/{faqId}', [FaqController::class, 'destroy'])->name('admin.faq.destroy');
 
         Route::get('/jemaah-umrah/download/manifest/{packageId}', [ManifestController::class, 'generatePdfByPackageId'])->name('download.manifest');
         Route::get('/jemaah-umrah/download/rekom-by-package-id/{packageId}', [RekomController::class, 'generateRekomByPackageId'])->name('download.rekom.by.packageId');

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('question', 255)->nullable(false);
             $table->text('answer')->nullable(false);
-            $table->unsignedBigInteger('user_creator_id')->nullable(false);
+            $table->unsignedBigInteger('user_creator_id')->nullable();
             $table->timestamps();
 
             $table->foreign('user_creator_id')->on('users')->references('id');

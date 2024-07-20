@@ -52,8 +52,13 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class, 'role_id', 'id');
     }
 
-    public function faq()
+    public function faq(): HasMany
     {
         return $this->hasMany(Faq::class, 'user_creator_id');
+    }
+
+    public function umrahPackages(): HasMany
+    {
+        return $this->hasMany(UmrahPackage::class, 'user_creator_id', 'id');
     }
 }

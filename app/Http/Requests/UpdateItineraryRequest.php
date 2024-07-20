@@ -11,7 +11,7 @@ class UpdateItineraryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class UpdateItineraryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'date' => 'required|date_format:Y-m-d',
+            'title' => 'required|max:255',
+            'activity' => 'required|string',
         ];
     }
 }

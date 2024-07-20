@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('itineraries', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('umrah_package_id')->nullable(false);
-            $table->date('date')->nullable();
-            $table->text('activity')->nullable();
-            $table->unsignedBigInteger('user_creator_id')->nullable(false);
+            $table->unsignedBigInteger('umrah_package_id');
+            $table->date('date');
+            $table->string('title', 255);
+            $table->text('activity');
+            $table->unsignedBigInteger('user_creator_id');
             $table->timestamps();
 
             $table->foreign('umrah_package_id')->on('umrah_packages')->references('id');

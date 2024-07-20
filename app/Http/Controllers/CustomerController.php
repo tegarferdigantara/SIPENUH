@@ -102,19 +102,16 @@ class CustomerController extends Controller
      * Display the specified resource.
      */
     // Show Data for SSR
-    public function showByPackage(int $packageId, Customer $customer)
+    public function showByPackage(int $packageId)
     {
-        $customers = $customer->with(['customerDocument', 'umrahPackage'])
-            ->where('umrah_package_id', $packageId)
+        $umrahPackage = UmrahPackage::findOrFail($packageId);
+
+        $customers = $umrahPackage->customers()
+            ->with(['customerDocument'])
             ->get();
 
-        $umrahPackage = UmrahPackage::where('id', $packageId)->first();
-
-        if (!$umrahPackage) {
-            abort(404, 'Paket Umrah tidak ditemukan.');
-        }
-
         $customers = CustomerResource::collection($customers);
+
         return view('admin.pages.customer-manage.list', compact('customers', 'umrahPackage'));
     }
     public function showCustomer(int $packageId, int $customerId)
@@ -264,6 +261,49 @@ class CustomerController extends Controller
         return response()->json([
             'data' => true
         ])->setStatusCode(200);
+    }
+
+    public function destroyByWebManage($registrationNumber, Customer $customer)
+    {
+        $customerData = $customer->with('customerDocument')->where('registration_number', $registrationNumber)->first();
+
+        $tempCustomerName = $customerData->name;
+
+        if (!$customerData) {
+            return redirect()->back()->with('error', 'Data calon jemaah tidak ditemukan');
+        }
+
+        $packageName = UmrahPackage::with('customers')->find($customerData->umrah_package_id);
+
+        if ($customerData->customerDocument) {
+            $document = $customerData->customerDocument;
+
+            $files = [
+                'customer_photo' => $document->customer_photo,
+                'passport_photo' => $document->passport_photo,
+                'id_photo' => $document->id_photo,
+                'birth_certificate_photo' => $document->birth_certificate_photo,
+                'family_card_photo' => $document->family_card_photo
+            ];
+
+            foreach ($files as $file) {
+                if ($file && Storage::disk('public')->exists($file)) {
+                    Storage::disk('public')->delete($file);
+                }
+            }
+
+            $document->delete();
+        }
+        CustomerAuditLog::createLog($customerData, 'deleted by ' . auth()->user()->name);
+        // Hapus entri di tabel 'customerDocument' yang terkait dengan 'customer'
+        $customerData->customerDocument()->delete();
+
+        // Hapus entri di tabel 'customer'
+        $customerData->delete();
+
+        $packageName->increment('quota', 1);
+
+        return redirect()->route('admin.customer.list.by.package', ['packageId' => $customerData->umrah_package_id])->with('success', 'Data Calon Jemaah ' . $tempCustomerName . ' berhasil dihapus.');
     }
 
 

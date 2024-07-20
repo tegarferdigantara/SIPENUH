@@ -7,7 +7,7 @@
                 <!-- Breadcrumb Start -->
                 <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <h2 class="text-title-md2 font-bold text-black dark:text-white">
-                        Informasi Paket - {{ $package->name }}
+                        {{ $package->name }}
                     </h2>
 
                     <nav>
@@ -33,313 +33,303 @@
                                 <h3 class="font-medium text-black dark:text-white">
                                     Detail
                                 </h3>
-                                <a data-fancybox data-type="iframe"
-                                    class="inline-flex items-center justify-center gap-2.5 rounded bg-primary px-4 py-2 text-center font-medium text-white text-xs hover:bg-opacity-90"
-                                    href="#">
-                                    <span>
-                                        <svg class="fill-current" fill="none" width="15" height="15"
-                                            version="1.1" id="lni_lni-download" xmlns="http://www.w3.org/2000/svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 64 64"
-                                            style="enable-background: new 0 0 64 64" xml:space="preserve">
-                                            <g>
-                                                <path
-                                                    d="M60,44c-1.2,0-2.3,1-2.3,2.3v8.9c0,0.9-0.7,1.6-1.6,1.6H7.9c-0.9,0-1.6-0.7-1.6-1.6v-8.9C6.3,45,5.2,44,4,44
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              s-2.3,1-2.3,2.3v8.9c0,3.4,2.7,6.1,6.1,6.1h48.3c3.4,0,6.1-2.7,6.1-6.1v-8.9C62.3,45,61.2,44,60,44z" />
-                                                <path
-                                                    d="M30.4,46.5c0.4,0.4,1,0.6,1.6,0.6s1.1-0.2,1.6-0.6l14.5-14.1c0.9-0.9,0.9-2.3,0-3.2c-0.9-0.9-2.3-0.9-3.2,0L34.3,39.6V5
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              c0-1.2-1-2.3-2.3-2.3c-1.2,0-2.3,1-2.3,2.3v34.6L19.1,29.2c-0.9-0.9-2.3-0.8-3.2,0c-0.9,0.9-0.8,2.3,0,3.2L30.4,46.5z" />
-                                            </g>
-                                        </svg>
-                                    </span>
-                                    Print Surat Rekomendasi
-                                </a>
+                                @if ($package->status === 'ACTIVE')
+                                    <span
+                                        class="block rounded bg-success px-2 py-1 text-xs font-medium text-white">Aktif</span>
+                                @elseif ($package->status === 'FULL')
+                                    <span
+                                        class="block rounded bg-warning px-2 py-1 text-xs font-medium text-white">Full</span>
+                                @else
+                                    <span
+                                        class="block rounded bg-primary px-2 py-1 text-xs font-medium text-white">Tutup</span>
+                                @endif
                             </div>
 
                             <div class="p-7">
                                 <div class="relative mb-5.5">
-                                    <label class="mb-3 block text-sm font-medium text-black dark:text-white"
-                                        for="umrah_package_name">
-                                        Paket Umrah Yang di Pilih
+                                    <div class="mb-5.5">
+                                        <label class="mb-3 block text-sm font-medium text-black dark:text-white"
+                                            for="name">Nama Paket</label>
+                                        <div class="relative">
+                                            <input
+                                                class="w-full rounded border border-stroke bg-gray px-4.5 py-3 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+                                                type="text" name="name" id="name" value="{{ $package->name }}"
+                                                readonly disabled />
+                                        </div>
+                                    </div>
+                                    <label class="mb-3 block text-sm font-medium text-black dark:text-white" for="id">
+                                        Kode Paket
                                     </label>
                                     <div class="relative">
                                         <input
                                             class="w-full rounded border border-stroke bg-gray px-4.5 py-3 pr-20 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
-                                            type="text" name="umrah_package_name" id="umrah_package_name" value="test"
-                                            readonly />
+                                            type="text" id="id" value="{{ $package->id }}" readonly disabled />
                                     </div>
                                 </div>
-
-
+                                <div class="relative mb-5.5">
+                                    <label class="mb-3 block text-sm font-medium text-black dark:text-white" for="price">
+                                        Harga Paket
+                                    </label>
+                                    <div class="relative">
+                                        <input
+                                            class="w-full rounded border border-stroke bg-gray px-4.5 py-3 pr-20 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+                                            type="text" id="price" value="@currency($package->price)" readonly disabled />
+                                    </div>
+                                </div>
+                                <div class="relative mb-5.5">
+                                    <label class="mb-3 block text-sm font-medium text-black dark:text-white" for="quota">
+                                        Kuota Tersisa
+                                    </label>
+                                    <div class="relative">
+                                        <input
+                                            class="w-full rounded border border-stroke bg-gray px-4.5 py-3 pr-20 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+                                            type="text" id="quota" value="{{ $package->quota }}" readonly disabled />
+                                    </div>
+                                </div>
                                 <div class="mb-5.5">
                                     <label class="mb-3 block text-sm font-medium text-black dark:text-white"
-                                        for="fullName">Nama Lengkap</label>
+                                        for="description">Deskripsi</label>
+                                    <textarea rows="6" disabled id="description"
+                                        class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary dark:disabled:bg-black">{{ $package->description }}</textarea>
+                                </div>
+                                <div class="mb-5.5 flex flex-col gap-5.5 sm:flex-row">
+                                    <div class="w-full sm:w-1/2">
+                                        <label class="mb-3 block text-sm font-medium text-black dark:text-white"
+                                            for="departure_date">Tanggal Keberangkatan</label>
+
+                                        <input
+                                            class="w-full rounded border border-stroke bg-gray px-4.5 py-3 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+                                            type="text" name="departure_date" id="departure_date"
+                                            value="{{ $formattedDate }}" readonly disabled />
+                                    </div>
+
+                                    <div class="w-full sm:w-1/2">
+                                        <label class="mb-3 block text-sm font-medium text-black dark:text-white"
+                                            for="duration">Durasi</label>
+                                        <input
+                                            class="w-full rounded border border-stroke bg-gray px-4.5 py-3 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+                                            type="text" name="duration" id="duration"
+                                            value="{{ $package->duration }} Hari" readonly disabled />
+                                    </div>
+                                </div>
+                                <div class="mb-5.5">
+                                    <label class="mb-3 block text-sm font-medium text-black dark:text-white"
+                                        for="facility">Fasilitas</label>
+                                    <div id="facility"
+                                        class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary dark:disabled:bg-black">
+                                        {!! $package->facility !!}
+                                    </div>
+                                </div>
+                                <div class="mb-5.5">
+                                    <label class="mb-3 block text-sm font-medium text-black dark:text-white"
+                                        for="destination">Destinasi Tujuan</label>
                                     <div class="relative">
-                                        <span class="absolute left-4.5 top-4">
-                                            <svg class="fill-current" width="20" height="20" viewBox="0 0 20 20"
-                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <g opacity="0.8">
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M3.72039 12.887C4.50179 12.1056 5.5616 11.6666 6.66667 11.6666H13.3333C14.4384 11.6666 15.4982 12.1056 16.2796 12.887C17.061 13.6684 17.5 14.7282 17.5 15.8333V17.5C17.5 17.9602 17.1269 18.3333 16.6667 18.3333C16.2064 18.3333 15.8333 17.9602 15.8333 17.5V15.8333C15.8333 15.1703 15.5699 14.5344 15.1011 14.0655C14.6323 13.5967 13.9964 13.3333 13.3333 13.3333H6.66667C6.00363 13.3333 5.36774 13.5967 4.8989 14.0655C4.43006 14.5344 4.16667 15.1703 4.16667 15.8333V17.5C4.16667 17.9602 3.79357 18.3333 3.33333 18.3333C2.8731 18.3333 2.5 17.9602 2.5 17.5V15.8333C2.5 14.7282 2.93899 13.6684 3.72039 12.887Z"
-                                                        fill="" />
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M9.99967 3.33329C8.61896 3.33329 7.49967 4.45258 7.49967 5.83329C7.49967 7.214 8.61896 8.33329 9.99967 8.33329C11.3804 8.33329 12.4997 7.214 12.4997 5.83329C12.4997 4.45258 11.3804 3.33329 9.99967 3.33329ZM5.83301 5.83329C5.83301 3.53211 7.69849 1.66663 9.99967 1.66663C12.3009 1.66663 14.1663 3.53211 14.1663 5.83329C14.1663 8.13448 12.3009 9.99996 9.99967 9.99996C7.69849 9.99996 5.83301 8.13448 5.83301 5.83329Z"
-                                                        fill="" />
-                                                </g>
+                                        <input
+                                            class="w-full rounded border border-stroke bg-gray px-4.5 py-3 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+                                            type="text" name="destination" id="destination"
+                                            value="{{ $package->destination }}" readonly disabled />
+
+                                    </div>
+                                </div>
+                                <div class="mb-5.5">
+                                    <label class="mb-3 block text-sm font-medium text-black dark:text-white"
+                                        for="user_creator_id">Pembuat Paket</label>
+                                    <input
+                                        class="w-full rounded border border-stroke bg-gray px-4.5 py-3 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+                                        type="text" name="user_creator_id" id="user_creator_id"
+                                        value="{{ $package->userCreator->name }}" readonly disabled />
+                                </div>
+                                <div class="mb-5.5">
+                                    <label class="mb-3 block text-sm font-medium text-black dark:text-white"
+                                        for="created_at">Tanggal Pembuatan Paket</label>
+                                    <input
+                                        class="w-full rounded border border-stroke bg-gray px-4.5 py-3 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+                                        type="text" name="created_at" id="created_at"
+                                        value="{{ \Carbon\Carbon::parse($package->created_at)->translatedFormat('l, d F Y H:i') }}"
+                                        readonly disabled />
+                                </div>
+                                <div class="mb-5.5">
+                                    <label class="mb-3 block text-sm font-medium text-black dark:text-white"
+                                        for="updated_at">Tanggal Paket di Update</label>
+                                    <input
+                                        class="w-full rounded border border-stroke bg-gray px-4.5 py-3 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+                                        type="text" name="updated_at" id="updated_at"
+                                        value="{{ \Carbon\Carbon::parse($package->updated_at)->translatedFormat('l, d F Y H:i') }}"
+                                        readonly disabled />
+                                </div>
+                                <div class="flex justify-end gap-4.5">
+                                    <a class="flex justify-center rounded bg-primary px-6 py-2 font-medium text-white hover:bg-opacity-90"
+                                        href="{{ route('admin.package.edit', ['packageId' => $package->id]) }}">
+                                        <span>
+                                            <svg class="fill-current mr-2" width="18" height="18" fill="none"
+                                                version="1.1" id="lni_lni-pencil-alt" xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                viewBox="0 0 64 64" style="enable-background: new 0 0 64 64"
+                                                xml:space="preserve">
+                                                <path
+                                                    d="M62.2,11.9c0-0.8-0.3-1.6-0.9-2.2c-1.2-1.2-2.4-2.4-3.5-3.6c-1.1-1.1-2.1-2.2-3.2-3.2c-0.5-0.6-1.1-1-1.9-1.1
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                c-0.9-0.1-1.7,0.1-2.4,0.7l-6.8,6.8H8.1c-3.4,0-6.3,2.8-6.3,6.3V56c0,3.4,2.8,6.3,6.3,6.3h40.5c3.4,0,6.3-2.8,6.3-6.3V20.5l6.5-6.5
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                C61.9,13.4,62.2,12.7,62.2,11.9z M32.8,36c-0.1,0.1-0.1,0.1-0.2,0.1l-7.2,2.4l2.4-7.2c0-0.1,0.1-0.1,0.1-0.2l18-18l5,4.9L32.8,36z
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                M50.3,56c0,1-0.8,1.8-1.8,1.8H8.1c-1,0-1.8-0.8-1.8-1.8V15.5c0-1,0.8-1.8,1.8-1.8h30.8L24.7,28c-0.5,0.5-1,1.2-1.2,2l-3.7,11.2
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                c-0.3,0.8-0.1,1.5,0.3,2.2c0.3,0.4,0.9,1,2,1h0.4l11.5-3.8c0.7-0.2,1.4-0.7,1.9-1.2L50.3,25V56z M54,14.9L49,10l3.1-3.1
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                c0.8,0.8,4.1,4.1,4.9,5L54,14.9z" />
                                             </svg>
                                         </span>
-                                        <input
-                                            class="w-full rounded border border-stroke bg-gray px-4.5 pl-11.5 py-3 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
-                                            type="text" name="fullName" id="fullName" value="{{ $package->name }}"
-                                            readonly />
-                                    </div>
+                                        Edit Paket Umrah
+                                    </a>
+                                    <form id="delete-form" action="#" method="POST" style="display: none;">
+                                        @csrf
+                                        @method('Delete')
+                                    </form>
+                                    @if ($package->customers()->count() == 0)
+                                        <button
+                                            class="flex justify-center rounded bg-meta-1 px-6 py-2 font-medium text-white hover:bg-opacity-90"
+                                            href="{{ route('admin.package.destroy', ['packageId' => $package->id]) }}"
+                                            onclick="confirmDelete()">
+                                            <span>
+                                                <svg class="fill-current" width="18" height="18"
+                                                    viewBox="0 0 18 18" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M13.7535 2.47502H11.5879V1.9969C11.5879 1.15315 10.9129 0.478149 10.0691 0.478149H7.90352C7.05977 0.478149 6.38477 1.15315 6.38477 1.9969V2.47502H4.21914C3.40352 2.47502 2.72852 3.15002 2.72852 3.96565V4.8094C2.72852 5.42815 3.09414 5.9344 3.62852 6.1594L4.07852 15.4688C4.13477 16.6219 5.09102 17.5219 6.24414 17.5219H11.7004C12.8535 17.5219 13.8098 16.6219 13.866 15.4688L14.3441 6.13127C14.8785 5.90627 15.2441 5.3719 15.2441 4.78127V3.93752C15.2441 3.15002 14.5691 2.47502 13.7535 2.47502ZM7.67852 1.9969C7.67852 1.85627 7.79102 1.74377 7.93164 1.74377H10.0973C10.2379 1.74377 10.3504 1.85627 10.3504 1.9969V2.47502H7.70664V1.9969H7.67852ZM4.02227 3.96565C4.02227 3.85315 4.10664 3.74065 4.24727 3.74065H13.7535C13.866 3.74065 13.9785 3.82502 13.9785 3.96565V4.8094C13.9785 4.9219 13.8941 5.0344 13.7535 5.0344H4.24727C4.13477 5.0344 4.02227 4.95002 4.02227 4.8094V3.96565ZM11.7285 16.2563H6.27227C5.79414 16.2563 5.40039 15.8906 5.37227 15.3844L4.95039 6.2719H13.0785L12.6566 15.3844C12.6004 15.8625 12.2066 16.2563 11.7285 16.2563Z"
+                                                        fill="" />
+                                                    <path
+                                                        d="M9.00039 9.11255C8.66289 9.11255 8.35352 9.3938 8.35352 9.75942V13.3313C8.35352 13.6688 8.63477 13.9782 9.00039 13.9782C9.33789 13.9782 9.64727 13.6969 9.64727 13.3313V9.75942C9.64727 9.3938 9.33789 9.11255 9.00039 9.11255Z"
+                                                        fill="" />
+                                                    <path
+                                                        d="M11.2502 9.67504C10.8846 9.64692 10.6033 9.90004 10.5752 10.2657L10.4064 12.7407C10.3783 13.0782 10.6314 13.3875 10.9971 13.4157C11.0252 13.4157 11.0252 13.4157 11.0533 13.4157C11.3908 13.4157 11.6721 13.1625 11.6721 12.825L11.8408 10.35C11.8408 9.98442 11.5877 9.70317 11.2502 9.67504Z"
+                                                        fill="" />
+                                                    <path
+                                                        d="M6.72245 9.67504C6.38495 9.70317 6.1037 10.0125 6.13182 10.35L6.3287 12.825C6.35683 13.1625 6.63808 13.4157 6.94745 13.4157C6.97558 13.4157 6.97558 13.4157 7.0037 13.4157C7.3412 13.3875 7.62245 13.0782 7.59433 12.7407L7.39745 10.2657C7.39745 9.90004 7.08808 9.64692 6.72245 9.67504Z"
+                                                        fill="" />
+                                                </svg>
+                                            </span>
+                                            Hapus Paket Umrah
+                                        </button>
+                                    @endif
                                 </div>
-                                <div class="mb-5.5">
-                                    <label class="mb-3 block text-sm font-medium text-black dark:text-white"
-                                        for="gender">Jenis Kelamin</label>
-                                    <input
-                                        class="w-full rounded border border-stroke bg-gray px-4.5 py-3 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
-                                        type="text" name="gender" id="gender" value="{{ $package->description }}"
-                                        readonly />
-                                </div>
-                                <div class="mb-5.5 flex flex-col gap-5.5 sm:flex-row">
-                                    <div class="w-full sm:w-1/2">
-                                        <label class="mb-3 block text-sm font-medium text-black dark:text-white"
-                                            for="birth_place">Tempat Lahir</label>
-                                        <input
-                                            class="w-full rounded border border-stroke bg-gray px-4.5 py-3 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
-                                            type="text" name="birth_place" id="birth_place"
-                                            value="{{ $package->depature_date }}" readonly />
-                                    </div>
-
-                                    <div class="w-full sm:w-1/2">
-                                        <label class="mb-3 block text-sm font-medium text-black dark:text-white"
-                                            for="birth_date">Tanggal Lahir</label>
-                                        <input
-                                            class="w-full rounded border border-stroke bg-gray px-4.5 py-3 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
-                                            type="text" name="birth_date" id="birth_date"
-                                            value="{{ $package->duration }}" readonly />
-                                    </div>
-                                </div>
-                                <div class="mb-5.5 flex flex-col gap-5.5 sm:flex-row">
-                                    <div class="w-full sm:w-1/2">
-                                        <label class="mb-3 block text-sm font-medium text-black dark:text-white"
-                                            for="id_number">Nomor Induk Kependudukan (NIK)</label>
-                                        <input
-                                            class="w-full rounded border border-stroke bg-gray px-4.5 py-3 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
-                                            type="text" name="id_number" id="id_number" value="{{ $package->price }}"
-                                            readonly />
-                                    </div>
-
-                                    <div class="w-full sm:w-1/2">
-                                        <label class="mb-3 block text-sm font-medium text-black dark:text-white"
-                                            for="passport_number">Nomor Paspor</label>
-                                        <input
-                                            class="w-full rounded border border-stroke bg-gray px-4.5 py-3 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
-                                            type="text" name="passport_number" id="passport_number"
-                                            value="{{ $package->facility }}" readonly />
-                                    </div>
-                                </div>
-                                <div class="mb-5.5">
-                                    <label class="mb-3 block text-sm font-medium text-black dark:text-white"
-                                        for="whatsapp_number">Nomor WhatsApp</label>
-                                    <div class="relative">
-                                        <input
-                                            class="w-full rounded border border-stroke bg-gray px-4.5 py-3 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
-                                            type="text" name="whatsapp_number" id="whatsapp_number"
-                                            value="{{ $package->destination }}" readonly />
-                                        <a class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-success text-white text-xs font-bold rounded px-2 py-1 flex items-center gap-1 hover:bg-opacity-90"
-                                            href="#">
-
-                                            <svg fill="#ffffff" width="20" height="20" viewBox="0 0 64 64"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M54 9.90039C48.2 4.10039 40.3 0.900391 32.2 0.900391C15.2 0.900391 1.3 14.7004 1.3 31.7004C1.3 37.2004 2.7 42.4004 5.4 47.2004L1 63.1004L17.5 58.9004C22 61.3004 27.1 62.7004 32.3 62.7004C49.2 62.6004 63 48.8004 63 31.7004C63 23.5004 59.8 15.8004 54 9.90039ZM32.1 57.4004C27.6 57.4004 22.9 56.1004 19 53.7004L18 53.1004L8.3 55.6004L11 46.2004L10.4 45.2004C7.9 41.1004 6.5 36.3004 6.5 31.5004C6.5 17.4004 17.9 6.00039 32.1 6.00039C38.9 6.00039 45.3 8.70039 50.1 13.5004C54.9 18.3004 57.6 24.8004 57.6 31.7004C57.8 46.0004 46.2 57.4004 32.1 57.4004ZM46.2 38.2004C45.4 37.8004 41.7 35.9004 40.8 35.8004C40.1 35.5004 39.5 35.4004 39.1 36.2004C38.7 37.0004 37.1 38.6004 36.7 39.2004C36.3 39.6004 35.9 39.8004 35 39.3004C34.2 38.9004 31.8 38.2004 28.8 35.4004C26.5 33.4004 24.9 30.9004 24.6 30.0004C24.2 29.2004 24.5 28.9004 25 28.4004C25.4 28.0004 25.8 27.6004 26.1 27.0004C26.5 26.6004 26.5 26.2004 26.9 25.7004C27.3 25.3004 27 24.7004 26.8 24.3004C26.5 23.9004 25.1 20.1004 24.4 18.5004C23.8 16.9004 23.1 17.2004 22.7 17.2004C22.3 17.2004 21.7 17.2004 21.3 17.2004C20.9 17.2004 19.9 17.3004 19.3 18.2004C18.6 19.0004 16.6 20.9004 16.6 24.7004C16.6 28.5004 19.3 32.0004 19.8 32.7004C20.2 33.1004 25.3 41.0004 32.9 44.4004C34.7 45.2004 36.1 45.7004 37.3 46.1004C39.1 46.7004 40.8 46.5004 42.1 46.4004C43.6 46.3004 46.6 44.6004 47.3 42.7004C47.9 41.0004 47.9 39.3004 47.7 39.0004C47.5 38.8004 46.9 38.5004 46.2 38.2004Z" />
-                                            </svg>
-
-                                            Kirim Pesan
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div class="mb-5.5">
-                                    <label class="mb-3 block text-sm font-medium text-black dark:text-white"
-                                        for="email">Email</label>
-                                    <input
-                                        class="w-full rounded border border-stroke bg-gray px-4.5 py-3 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
-                                        type="text" name="email" id="email" value="{{ $package->status }}"
-                                        readonly />
-                                </div>
-                                <div class="mb-5.5">
-                                    <label class="mb-3 block text-sm font-medium text-black dark:text-white"
-                                        for="family_number">Nomor HP Keluarga</label>
-                                    <input
-                                        class="w-full rounded border border-stroke bg-gray px-4.5 py-3 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
-                                        type="text" name="family_number" id="family_number"
-                                        value="{{ $package->user_creator_id }}" readonly />
-                                </div>
-                                <div class="mb-5.5">
-                                    <label class="mb-3 block text-sm font-medium text-black dark:text-white"
-                                        for="address">Alamat</label>
-                                    <input
-                                        class="w-full rounded border border-stroke bg-gray px-4.5 py-3 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
-                                        type="text" name="address" id="address" value="{{ $package->created_at }}"
-                                        readonly />
-                                </div>
-                                <div class="mb-5.5">
-                                    <label class="mb-3 block text-sm font-medium text-black dark:text-white"
-                                        for="subdistrict">Kecamatan</label>
-                                    <input
-                                        class="w-full rounded border border-stroke bg-gray px-4.5 py-3 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
-                                        type="text" name="subdistrict" id="subdistrict"
-                                        value="{{ $package->updated_at }}" readonly />
-                                </div>
-                                {{-- <div class="mb-5.5 flex flex-col gap-5.5 sm:flex-row">
-                                    <div class="w-full sm:w-1/2">
-                                        <label class="mb-3 block text-sm font-medium text-black dark:text-white"
-                                            for="city">Kota/Kab.</label>
-                                        <input
-                                            class="w-full rounded border border-stroke bg-gray px-4.5 py-3 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
-                                            type="text" name="city" id="city" value="{{ $customer->city }}"
-                                            readonly />
-                                    </div>
-
-                                    <div class="w-full sm:w-1/2">
-                                        <label class="mb-3 block text-sm font-medium text-black dark:text-white"
-                                            for="province">Provinsi</label>
-                                        <input
-                                            class="w-full rounded border border-stroke bg-gray px-4.5 py-3 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
-                                            type="text" name="province" id="province"
-                                            value="{{ $customer->province }}" readonly />
-                                    </div>
-                                </div>
-                                <div class="mb-5.5 flex flex-col gap-5.5 sm:flex-row">
-                                    <div class="w-full sm:w-1/2">
-                                        <label class="mb-3 block text-sm font-medium text-black dark:text-white"
-                                            for="father_name">Nama Ayah</label>
-                                        <input
-                                            class="w-full rounded border border-stroke bg-gray px-4.5 py-3 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
-                                            type="text" name="father_name" id="father_name"
-                                            value="{{ $customer->father_name }}" readonly />
-                                    </div>
-                                    <div class="w-full sm:w-1/2">
-                                        <label class="mb-3 block text-sm font-medium text-black dark:text-white"
-                                            for="mother_name">Nama Ibu</label>
-                                        <input
-                                            class="w-full rounded border border-stroke bg-gray px-4.5 py-3 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
-                                            type="text" name="mother_name" id="mother_name"
-                                            value="{{ $customer->mother_name }}" readonly />
-                                    </div>
-                                </div> --}}
                             </div>
-
                         </div>
                     </div>
                     <div class="col-span-5 xl:col-span-2">
-                        {{-- <div
-                            class="rounded-sm border border-stroke bg-white shadow-default mb-4 dark:border-strokedark dark:bg-boxdark">
-                            @php
-                                $fotoJemaah = 'Foto Jemaah';
-                            @endphp
-                            <div class="border-b border-stroke px-7 py-4 dark:border-strokedark">
-                                <h3 class="font-medium text-black dark:text-white">
-                                    {{ $fotoJemaah }}
-                                </h3>
-                            </div>
-                            <div class="p-1">
-                                <a data-fancybox="{{ Str::slug($customer->full_name) }}"
-                                    class="relative mb-5.5 block w-full rounded border border-dashed border-primary bg-gray px-2 py-2 dark:bg-meta-4 sm:py-7.5"
-                                    href="{{ public_path('storage/' . $customer->customerDocument->customer_photo) }}"
-                                    data-options='{"buttons" : ["close"]} ' data-caption="{{ $fotoJemaah }}">
-                                    <img src="{{ public_path('storage/' . $customer->customerDocument->customer_photo) }}"
-                                        alt="{{ $fotoJemaah }}"
-                                        class="w-full h-auto rounded cursor-pointer hover:shadow-lg hover:opacity-75 transition duration-300">
-                                </a>
-                            </div>
-                        </div>
                         <div
                             class="rounded-sm border border-stroke bg-white shadow-default mb-4 dark:border-strokedark dark:bg-boxdark">
-                            @php
-                                $fotoKtp = 'Foto KTP';
-                            @endphp
-                            <div class="border-b border-stroke px-7 py-4 dark:border-strokedark">
+                            <div class="border-b border-stroke px-5 py-4 dark:border-strokedark">
                                 <h3 class="font-medium text-black dark:text-white">
-                                    {{ $fotoKtp }}
+                                    Itinerary Perjalanan
                                 </h3>
                             </div>
-                            <div class="p-1">
-                                <a data-fancybox="{{ Str::slug($customer->full_name) }}"
-                                    class="relative mb-5.5 block w-full rounded border border-dashed border-primary bg-gray px-2 py-2 dark:bg-meta-4 sm:py-7.5"
-                                    href="{{ public_path('storage/' . $customer->customerDocument->id_photo) }}"
-                                    data-options='{"buttons" : ["close"]} ' data-caption="{{ $fotoKtp }}">
-                                    <img src="{{ public_path('storage/' . $customer->customerDocument->id_photo) }}"
-                                        alt="{{ $fotoKtp }}"
-                                        class="w-full h-auto rounded cursor-pointer hover:shadow-lg hover:opacity-75 transition duration-300">
-                                </a>
+                            <div class="p-4">
+                                <ul class="list-disc pl-5 pb-3 space-y-2">
+                                    @php
+                                        $currentDay = null;
+                                    @endphp
+                                    @forelse ($itineraries as $itinerary)
+                                        @php
+                                            $date = \Carbon\Carbon::parse($itinerary->date);
+                                            $formattedDay = $date->translatedFormat('l'); // Hari dalam bahasa Inggris
+                                            $formattedDateItinerary = $date->translatedFormat('d F Y'); // Format tanggal
+                                        @endphp
+
+                                        {{-- Tampilkan nama hari hanya jika berbeda dengan hari sebelumnya --}}
+                                        @if ($formattedDay !== $currentDay)
+                                            <li
+                                                class="border-b border-stroke px-2 py-3 last:border-b-0 dark:border-strokedark">
+                                                <strong>{{ $formattedDay }}, {{ $formattedDateItinerary }}</strong>
+                                            </li>
+                                            @php $currentDay = $formattedDay; @endphp
+                                        @endif
+
+                                        {{-- Tampilkan detail itinerary --}}
+                                        <li
+                                            class="border-b border-stroke px-2 py-3 last:border-b-0 dark:border-strokedark flex justify-between items-center">
+                                            <div>
+                                                <strong>{{ $itinerary->title }}</strong>
+                                                <p>{!! $itinerary->activity !!}</p>
+                                            </div>
+                                            <div class="flex items-center space-x-2">
+                                                <a class="hover:text-primary"
+                                                    href="{{ route('admin.package.itinerary.edit', ['packageId' => $package->id, 'itineraryId' => $itinerary->id]) }}"
+                                                    title="Edit Itinerary">
+                                                    <svg class="fill-current" width="18" height="18"
+                                                        fill="none" version="1.1" id="lni_lni-pencil-alt"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                        viewBox="0 0 64 64" style="enable-background: new 0 0 64 64"
+                                                        xml:space="preserve">
+                                                        <path
+                                                            d="M62.2,11.9c0-0.8-0.3-1.6-0.9-2.2c-1.2-1.2-2.4-2.4-3.5-3.6c-1.1-1.1-2.1-2.2-3.2-3.2c-0.5-0.6-1.1-1-1.9-1.1
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                c-0.9-0.1-1.7,0.1-2.4,0.7l-6.8,6.8H8.1c-3.4,0-6.3,2.8-6.3,6.3V56c0,3.4,2.8,6.3,6.3,6.3h40.5c3.4,0,6.3-2.8,6.3-6.3V20.5l6.5-6.5
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                C61.9,13.4,62.2,12.7,62.2,11.9z M32.8,36c-0.1,0.1-0.1,0.1-0.2,0.1l-7.2,2.4l2.4-7.2c0-0.1,0.1-0.1,0.1-0.2l18-18l5,4.9L32.8,36z
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                M50.3,56c0,1-0.8,1.8-1.8,1.8H8.1c-1,0-1.8-0.8-1.8-1.8V15.5c0-1,0.8-1.8,1.8-1.8h30.8L24.7,28c-0.5,0.5-1,1.2-1.2,2l-3.7,11.2
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                c-0.3,0.8-0.1,1.5,0.3,2.2c0.3,0.4,0.9,1,2,1h0.4l11.5-3.8c0.7-0.2,1.4-0.7,1.9-1.2L50.3,25V56z M54,14.9L49,10l3.1-3.1
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                c0.8,0.8,4.1,4.1,4.9,5L54,14.9z" />
+                                                    </svg>
+                                                </a>
+
+                                                <form
+                                                    action="{{ route('admin.package.itinerary.destroy', ['packageId' => $package->id, 'itineraryId' => $itinerary->id]) }}"
+                                                    id="delete-itinerary-form" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
+                                                <button class="hover:text-primary" title="Delete Itinerary"
+                                                    onclick="confirmDeleteItinerary()">
+                                                    <svg class="fill-current" width="18" height="18"
+                                                        viewBox="0 0 18 18" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M13.7535 2.47502H11.5879V1.9969C11.5879 1.15315 10.9129 0.478149 10.0691 0.478149H7.90352C7.05977 0.478149 6.38477 1.15315 6.38477 1.9969V2.47502H4.21914C3.40352 2.47502 2.72852 3.15002 2.72852 3.96565V4.8094C2.72852 5.42815 3.09414 5.9344 3.62852 6.1594L4.07852 15.4688C4.13477 16.6219 5.09102 17.5219 6.24414 17.5219H11.7004C12.8535 17.5219 13.8098 16.6219 13.866 15.4688L14.3441 6.13127C14.8785 5.90627 15.2441 5.3719 15.2441 4.78127V3.93752C15.2441 3.15002 14.5691 2.47502 13.7535 2.47502ZM7.67852 1.9969C7.67852 1.85627 7.79102 1.74377 7.93164 1.74377H10.0973C10.2379 1.74377 10.3504 1.85627 10.3504 1.9969V2.47502H7.70664V1.9969H7.67852ZM4.02227 3.96565C4.02227 3.85315 4.10664 3.74065 4.24727 3.74065H13.7535C13.866 3.74065 13.9785 3.82502 13.9785 3.96565V4.8094C13.9785 4.9219 13.8941 5.0344 13.7535 5.0344H4.24727C4.13477 5.0344 4.02227 4.95002 4.02227 4.8094V3.96565ZM11.7285 16.2563H6.27227C5.79414 16.2563 5.40039 15.8906 5.37227 15.3844L4.95039 6.2719H13.0785L12.6566 15.3844C12.6004 15.8625 12.2066 16.2563 11.7285 16.2563Z"
+                                                            fill="" />
+                                                        <path
+                                                            d="M9.00039 9.11255C8.66289 9.11255 8.35352 9.3938 8.35352 9.75942V13.3313C8.35352 13.6688 8.63477 13.9782 9.00039 13.9782C9.33789 13.9782 9.64727 13.6969 9.64727 13.3313V9.75942C9.64727 9.3938 9.33789 9.11255 9.00039 9.11255Z"
+                                                            fill="" />
+                                                        <path
+                                                            d="M11.2502 9.67504C10.8846 9.64692 10.6033 9.90004 10.5752 10.2657L10.4064 12.7407C10.3783 13.0782 10.6314 13.3875 10.9971 13.4157C11.0252 13.4157 11.0252 13.4157 11.0533 13.4157C11.3908 13.4157 11.6721 13.1625 11.6721 12.825L11.8408 10.35C11.8408 9.98442 11.5877 9.70317 11.2502 9.67504Z"
+                                                            fill="" />
+                                                        <path
+                                                            d="M6.72245 9.67504C6.38495 9.70317 6.1037 10.0125 6.13182 10.35L6.3287 12.825C6.35683 13.1625 6.63808 13.4157 6.94745 13.4157C6.97558 13.4157 6.97558 13.4157 7.0037 13.4157C7.3412 13.3875 7.62245 13.0782 7.59433 12.7407L7.39745 10.2657C7.39745 9.90004 7.08808 9.64692 6.72245 9.67504Z"
+                                                            fill="" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </li>
+                                    @empty
+                                        <ul class="list-disc pl-5 pb-3 space-y-2">
+                                            <li
+                                                class="border-b border-stroke px-2 py-3 last:border-b-0 dark:border-strokedark">
+                                                <p>Itinerary tidak ditemukan</p>
+                                            </li>
+                                        </ul>
+                                    @endforelse
+                                </ul>
+                                <div class="flex px-2 py-3 justify-end gap-2.5">
+                                    <a class="flex justify-center rounded bg-primary px-6 py-2 font-medium text-white hover:bg-opacity-90"
+                                        href="{{ route('admin.package.itinerary.create', ['packageId' => $package->id]) }}">
+                                        <span>
+                                            <svg fill="none" class="fill-current mr-2" width="20" height="20"
+                                                version="1.1" id="lni_lni-circle-plus"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                viewBox="0 0 64 64" style="enable-background:new 0 0 64 64;"
+                                                xml:space="preserve">
+                                                <g>
+                                                    <path
+                                                        d="M42.2,29.7C42.2,29.7,42.2,29.7,42.2,29.7l-8,0l0-7.9c0-1.2-1-2.2-2.3-2.2c0,0,0,0,0,0c-1.2,0-2.2,1-2.2,2.3l0,7.9l-7.9,0
+                                                                                                                                                                            c-1.2,0-2.2,1-2.2,2.3c0,1.2,1,2.2,2.3,2.2c0,0,0,0,0,0l7.9,0l0,7.9c0,1.2,1,2.2,2.3,2.2c0,0,0,0,0,0c1.2,0,2.2-1,2.2-2.3l0-7.9
+                                                                                                                                                                            l7.9,0c1.2,0,2.2-1,2.2-2.3C44.4,30.7,43.4,29.7,42.2,29.7z" />
+                                                    <path
+                                                        d="M32,1.8C15.3,1.8,1.8,15.3,1.8,32c0,16.7,13.6,30.3,30.3,30.3c16.7,0,30.3-13.6,30.3-30.3C62.3,15.3,48.7,1.8,32,1.8z
+                                                                                                                                                                             M32,57.8C17.8,57.8,6.3,46.2,6.3,32S17.8,6.3,32,6.3S57.8,17.8,57.8,32S46.2,57.8,32,57.8z" />
+                                                </g>
+                                            </svg>
+
+                                        </span>
+                                        Tambah
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                        <div
-                            class="rounded-sm border border-stroke bg-white shadow-default mb-4 dark:border-strokedark dark:bg-boxdark">
-                            @php
-                                $fotoKk = 'Foto KK';
-                            @endphp
-                            <div class="border-b border-stroke px-7 py-4 dark:border-strokedark">
-                                <h3 class="font-medium text-black dark:text-white">
-                                    {{ $fotoKk }}
-                                </h3>
-                            </div>
-                            <div class="p-1">
-                                <a data-fancybox="{{ Str::slug($customer->full_name) }}"
-                                    class="relative mb-5.5 block w-full rounded border border-dashed border-primary bg-gray px-2 py-2 dark:bg-meta-4 sm:py-7.5"
-                                    href="{{ public_path('storage/' . $customer->customerDocument->family_card_photo) }}"
-                                    data-options='{"buttons" : ["close"]} ' data-caption="{{ $fotoKk }}">
-                                    <img src="{{ public_path('storage/' . $customer->customerDocument->family_card_photo) }}"
-                                        alt="{{ $fotoKk }}"
-                                        class="w-full h-auto rounded cursor-pointer hover:shadow-lg hover:opacity-75 transition duration-300">
-                                </a>
-                            </div>
-                        </div>
-                        <div
-                            class="rounded-sm border border-stroke bg-white shadow-default mb-4 dark:border-strokedark dark:bg-boxdark">
-                            @php
-                                $fotoPaspor = 'Foto Paspor';
-                            @endphp
-                            <div class="border-b border-stroke px-7 py-4 dark:border-strokedark">
-                                <h3 class="font-medium text-black dark:text-white">
-                                    {{ $fotoPaspor }}
-                                </h3>
-                            </div>
-                            <div class="p-1">
-                                <a data-fancybox="{{ Str::slug($customer->full_name) }}"
-                                    class="relative mb-5.5 block w-full rounded border border-dashed border-primary bg-gray px-2 py-2 dark:bg-meta-4 sm:py-7.5"
-                                    href="{{ $customer->customerDocument->passport_photo ? public_path('storage/' . $customer->customerDocument->passport_photo) : public_path('assets/images/sipenuh-img/passport-no-available.png') }}"
-                                    data-options='{"buttons" : ["close"]} ' data-caption="{{ $fotoPaspor }}">
-                                    <img src="{{ $customer->customerDocument->passport_photo ? public_path('storage/' . $customer->customerDocument->passport_photo) : public_path('assets/images/sipenuh-img/passport-no-available.png') }}"
-                                        alt="{{ $fotoPaspor }}"
-                                        class="w-full h-auto rounded cursor-pointer hover:shadow-lg hover:opacity-75 transition duration-300">
-                                </a>
-                            </div>
-                        </div>
-                        <div
-                            class="rounded-sm border border-stroke bg-white shadow-default mb-4 dark:border-strokedark dark:bg-boxdark">
-                            @php
-                                $fotoAkte = 'Foto Akte';
-                            @endphp
-                            <div class="border-b border-stroke px-7 py-4 dark:border-strokedark">
-                                <h3 class="font-medium text-black dark:text-white">
-                                    {{ $fotoAkte }}
-                                </h3>
-                            </div>
-                            <div class="p-1">
-                                <a data-fancybox="{{ Str::slug($customer->full_name) }}"
-                                    class="relative mb-5.5 block w-full rounded border border-dashed border-primary bg-gray px-2 py-2 dark:bg-meta-4 sm:py-7.5"
-                                    href="{{ public_path('storage/' . $customer->customerDocument->birth_certificate_photo) }}"
-                                    data-options='{"buttons" : ["close"]} ' data-caption="{{ $fotoAkte }}">
-                                    <img src="{{ public_path('storage/' . $customer->customerDocument->birth_certificate_photo) }}"
-                                        alt="{{ $fotoAkte }}"
-                                        class="w-full h-auto rounded cursor-pointer hover:shadow-lg hover:opacity-75 transition duration-300">
-                                </a>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -349,3 +339,8 @@
         </div>
     </main>
 @endsection
+
+@push('scripts')
+    @include('admin.components.alerts.notification')
+    @include('admin.components.alerts.confirm')
+@endpush

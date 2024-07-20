@@ -11,7 +11,7 @@ class UpdateUmrahPackageRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,15 @@ class UpdateUmrahPackageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'departure_date' => 'required|date',
+            'duration' => 'required|integer|min:1',
+            'price' => 'required|integer|min:0',
+            'facility' => 'required|string',
+            'destination' => 'required|string',
+            'quota' => 'required|integer|min:1',
+            'status' => 'required|in:ACTIVE,FULL,CLOSED',
         ];
     }
 }

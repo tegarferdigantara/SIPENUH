@@ -188,7 +188,6 @@ class CustomerDocumentController extends Controller
             return redirect()->back()->with('error', 'Foto tidak ditemukan pada dokumen');
         }
 
-        // Redirect atau berikan respons sesuai kebutuhan aplikasi Anda
         return redirect()->back()->with('success', 'Foto berhasil diputar!');
     }
 

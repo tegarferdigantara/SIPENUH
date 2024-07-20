@@ -20,7 +20,7 @@
 
     <div class="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
         <!-- Sidebar Menu -->
-        <nav class="mt-5 px-4 py-4 lg:mt-9 lg:px-6" x-data="{ selected: $persist('Dashboard') }">
+        <nav class="mt-5 px-4 py-4 lg:mt-9 lg:px-6">
             <!-- Dashboard -->
             <div>
                 <ul class="mb-6 flex flex-col gap-1.5">
@@ -28,7 +28,7 @@
                     <div>
                         <ul>
                             <li>
-                                <a class="group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out{{ Request::routeIs('admin.dashboard') ? 'bg-graydark dark:bg-meta-4' : '' }} hover:bg-graydark dark:hover:bg-meta-4"
+                                <a class="group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out {{ Request::routeIs('admin.dashboard') ? 'bg-graydark dark:bg-meta-4' : '' }} hover:bg-graydark dark:hover:bg-meta-4"
                                     href="{{ route('admin.dashboard') }}">
                                     <svg class="fill-current" width="18" height="18" viewBox="0 0 18 18"
                                         fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -125,38 +125,41 @@
                                 </li>
                                 @isset($umrahPackages)
                                     @foreach ($umrahPackages as $umrahPackage)
-                                        <li x-data="{ isActive: false }" x-init="let routes = [
-                                            '{{ route('admin.customer.list.by.package', [$umrahPackage->id]) }}'
-                                        ];
-                                        @if (isset($customer->id)) routes.push('{{ route('admin.customer.detail.by.package', ['packageId' => $umrahPackage->id, 'customerId' => $customer->id]) }}');
-                                            routes.push('{{ route('admin.customer.detail.by.package.edit', ['packageId' => $umrahPackage->id, 'customerId' => $customer->id]) }}'); @endif
-                                        isActive = routes.includes('{{ Request::url() }}');"
+                                        <li x-data="{ isActive: false }" x-init="isActive = [
+                                            '{{ route('admin.customer.list.by.package', [$umrahPackage->id]) }}',
+                                            @if (isset($customer->id)) '{{ route('admin.customer.detail.by.package', ['packageId' => $umrahPackage->id, 'customerId' => $customer->id]) }}',
+                                        '{{ route('admin.customer.detail.by.package.edit', ['packageId' => $umrahPackage->id, 'customerId' => $customer->id]) }}', @endif
+                                        ].includes('{{ Request::url() }}')"
                                             class="relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white"
                                             :class="{ 'text-white': isActive }">
-                                            <div class="flex items-center w-full">
-                                                <a class="group relative flex-grow"
-                                                    href="{{ route('admin.customer.list.by.package', [$umrahPackage->id]) }}">
-                                                    <span class="inline-block">{{ $umrahPackage->name }}
-                                                    </span>
-                                                </a>
+
+                                            <a href="{{ route('admin.customer.list.by.package', [$umrahPackage->id]) }}"
+                                                class="group relative flex items-center px-2 w-full">
+                                                <span class="inline-block">{{ $umrahPackage->name }}</span>
+
                                                 <span class="absolute right-0 top-1/2 -translate-y-1/2">
-                                                    @if ($umrahPackage->status === 'ACTIVE')
-                                                        <span
-                                                            class="block rounded bg-success px-2 py-1 text-xs font-medium text-white">Aktif</span>
-                                                    @elseif ($umrahPackage->status === 'FULL')
-                                                        <span
-                                                            class="block rounded bg-warning px-2 py-1 text-xs font-medium text-white">Full</span>
-                                                    @else
-                                                        <span
-                                                            class="block rounded bg-primary px-2 py-1 text-xs font-medium text-white">Tutup</span>
-                                                    @endif
+                                                    @switch($umrahPackage->status)
+                                                        @case('ACTIVE')
+                                                            <span
+                                                                class="block rounded bg-success px-2 py-1 text-xs font-medium text-white">Aktif</span>
+                                                        @break
+
+                                                        @case('FULL')
+                                                            <span
+                                                                class="block rounded bg-warning px-2 py-1 text-xs font-medium text-white">Full</span>
+                                                        @break
+
+                                                        @default
+                                                            <span
+                                                                class="block rounded bg-primary px-2 py-1 text-xs font-medium text-white">Tutup</span>
+                                                    @endswitch
                                                 </span>
-                                            </div>
+                                            </a>
                                         </li>
                                     @endforeach
                                 @else
                                     <li class="mb-2">
-                                        <span class="block p-2">No packages available</span>
+                                        <span class="block p-2">No package available</span>
                                     </li>
                                 @endisset
                             </ul>
@@ -167,6 +170,7 @@
                     <li x-data="{
                         isOpen: false,
                         checkIfActive() {
+                            this.isOpen = {{ request()->routeIs('admin.package.create') ? 'true' : 'false' }};
                             // Check if any item in the dropdown is active
                             @foreach ($umrahPackages as $umrahPackage)
                                 this.isOpen = this.isOpen || {{ Request::is('admin/paket-umrah/' . $umrahPackage->id . '*') ? 'true' : 'false' }}; @endforeach
@@ -198,29 +202,49 @@
                         <!-- Dropdown Menu Start -->
                         <div x-show="isOpen" class="translate transform overflow-hidden block">
                             <ul class="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
+                                <li x-data="{ isActive: '{{ route('admin.package.create') === Request::url() }}' }"
+                                    class="relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white"
+                                    :class="{ 'text-white': isActive }">
+                                    <div class="flex items-center w-full">
+                                        <a class="group relative flex-grow"
+                                            href="{{ route('admin.package.create') }}">
+                                            <span class="inline-block">(+) Buat Paket Baru</span>
+                                        </a>
+                                    </div>
+                                </li>
                                 @isset($umrahPackages)
                                     @foreach ($umrahPackages as $umrahPackage)
-                                        <li x-data="{ isActive: false }" x-init="isActive = '{{ route('admin.package.show', [$umrahPackage->id]) === Request::url() }}'"
+                                        <li x-data="{ isActive: false }" x-init="isActive = [
+                                            '{{ route('admin.package.show', [$umrahPackage->id]) }}',
+                                            '{{ route('admin.package.edit', [$umrahPackage->id]) }}',
+                                            '{{ route('admin.package.itinerary.create', [$umrahPackage->id]) }}',
+                                            @if (isset($itinerary)) '{{ route('admin.package.itinerary.edit', ['packageId' => $umrahPackage->id, 'itineraryId' => $itinerary->id]) }}', @endif
+                                        ].includes('{{ Request::url() }}')"
                                             class="relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white"
                                             :class="{ 'text-white': isActive }">
-                                            <div class="flex items-center w-full">
-                                                <a class="group relative flex-grow"
-                                                    href="{{ route('admin.package.show', [$umrahPackage->id]) }}">
-                                                    <span class="inline-block">{{ $umrahPackage->name }}</span>
-                                                </a>
+
+                                            <a href="{{ route('admin.package.show', [$umrahPackage->id]) }}"
+                                                class="group relative flex items-center px-2 w-full">
+                                                <span class="inline-block">{{ $umrahPackage->name }}</span>
+
                                                 <span class="absolute right-0 top-1/2 -translate-y-1/2">
-                                                    @if ($umrahPackage->status === 'ACTIVE')
-                                                        <span
-                                                            class="block rounded bg-success px-2 py-1 text-xs font-medium text-white">Aktif</span>
-                                                    @elseif ($umrahPackage->status === 'FULL')
-                                                        <span
-                                                            class="block rounded bg-warning px-2 py-1 text-xs font-medium text-white">Full</span>
-                                                    @else
-                                                        <span
-                                                            class="block rounded bg-primary px-2 py-1 text-xs font-medium text-white">Tutup</span>
-                                                    @endif
+                                                    @switch($umrahPackage->status)
+                                                        @case('ACTIVE')
+                                                            <span
+                                                                class="block rounded bg-success px-2 py-1 text-xs font-medium text-white">Aktif</span>
+                                                        @break
+
+                                                        @case('FULL')
+                                                            <span
+                                                                class="block rounded bg-warning px-2 py-1 text-xs font-medium text-white">Full</span>
+                                                        @break
+
+                                                        @default
+                                                            <span
+                                                                class="block rounded bg-primary px-2 py-1 text-xs font-medium text-white">Tutup</span>
+                                                    @endswitch
                                                 </span>
-                                            </div>
+                                            </a>
                                         </li>
                                     @endforeach
                                 @else
@@ -234,9 +258,8 @@
                     </li>
                     <!-- Menu Item Dashboard -->
                     <li>
-                        <a class="group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
-                            href="index.html" @click="selected = (selected === 'FAQ Chatbot' ? '':'FAQ Chatbot')"
-                            :class="{ 'bg-graydark dark:bg-meta-4': (selected === 'FAQ Chatbot') }">
+                        <a class="group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 {{ request()->is('admin/faq*') ? 'bg-graydark dark:bg-meta-4' : '' }}"
+                            href="{{ route('admin.faq.list') }}">
                             <svg class="fill-current" width="18" height="18" fill="none" version="1.1"
                                 id="lni_lni-package" xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 64 64"

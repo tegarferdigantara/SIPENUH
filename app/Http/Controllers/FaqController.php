@@ -15,7 +15,9 @@ class FaqController extends Controller
      */
     public function index()
     {
-        //
+        $faqs = Faq::orderBy('updated_at', 'ASC')->get();
+
+        return view('admin.pages.faq-manage.list', compact('faqs'));
     }
 
     /**
@@ -23,7 +25,7 @@ class FaqController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pages.faq-manage.create');
     }
 
     /**
@@ -31,6 +33,10 @@ class FaqController extends Controller
      */
     public function store(StoreFaqRequest $request)
     {
+        $data = $request->validated();
+        Faq::create($data);
+
+        return redirect()->route('admin.faq.list')->with('success', 'FAQ berhasil ditambah!');
     }
 
     /**
@@ -46,24 +52,34 @@ class FaqController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Faq $faq)
+    public function edit(int $faqId, Faq $faq)
     {
-        //
+        $faqData = $faq->findOrFail($faqId);
+
+        return view('admin.pages.faq-manage.edit', compact('faqData'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateFaqRequest $request, Faq $faq)
+    public function update(int $faqId, UpdateFaqRequest $request, Faq $faq)
     {
-        //
+        $faqData = $faq->findOrFail($faqId);
+
+        $faqData->update($request->validated());
+
+        return redirect()->route('admin.faq.list')->with('success', 'FAQ berhasil diperbarui!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Faq $faq)
+    public function destroy(int $faqId, Faq $faq)
     {
-        //
+        $faqData = $faq->findOrFail($faqId);
+
+        $faqData->delete();
+
+        return redirect()->route('admin.faq.list')->with('success', 'FAQ berhasil dihapus!');
     }
 }

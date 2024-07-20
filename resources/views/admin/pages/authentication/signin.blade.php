@@ -6,13 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Sign In | TailAdmin - Tailwind CSS Admin Dashboard Template</title>
+    <title>Sign In | SIPENUH</title>
     <link rel="icon" href="{{ asset('favicon.ico') }}">
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
-    {{-- Toastr Notification --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    {{-- SweetAlert Notification --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.all.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.min.css" rel="stylesheet">
     {{-- Axios --}}
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
@@ -180,23 +179,18 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
     </div>
     <!-- ===== Page Wrapper End ===== -->
     <script>
-        toastr.options = {
-            "closeButton": false,
-            "debug": false,
-            "newestOnTop": false,
-            "progressBar": true,
-            "positionClass": "toast-top-right",
-            "preventDuplicates": true,
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "500",
-            "timeOut": "2000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        }
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+
 
         // admin.pages.authentication.signin.blade.php atau script terpisah
         document.getElementById('loginForm').addEventListener('submit', function(event) {
@@ -217,17 +211,25 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
                 .then(function(response) {
                     console.log(response);
                     if (response.status == 200) {
-                        toastr["success"]("Login Berhasil");
+                        Toast.fire({
+                            icon: "success",
+                            title: "Login Berhasil"
+                        });
                         setTimeout(function() {
                             window.location.href = '{{ route('admin.dashboard') }}';
                         }, 2000);
                     } else {
-                        toastr["error"]("Unknown Error");
+                        Toast.fire({
+                            icon: "error",
+                            title: "Unknown Error"
+                        });
                     }
                 })
                 .catch(function(error) {
-                    toastr["error"](error.response.data.message);
-                    console.error('Error:', error);
+                    Toast.fire({
+                        icon: "error",
+                        title: error
+                    });
                 });
         });
     </script>

@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Models\Customer;
 use App\Models\UmrahPackage;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -22,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Carbon::setLocale('id');
         View::composer('admin.layouts.app', function ($view) {
             $umrahPackages = UmrahPackage::orderByRaw("
             CASE
@@ -32,6 +35,10 @@ class AppServiceProvider extends ServiceProvider
             END")->get();
 
             $view->with('umrahPackages', $umrahPackages);
+        });
+
+        Blade::directive('currency', function ($expression) {
+            return "<?php echo 'Rp ' . number_format($expression, 2, ',', '.'); ?>";
         });
     }
 }
