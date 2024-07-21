@@ -22,7 +22,7 @@ class StoreItineraryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'date' => 'required|date_format:Y-m-d',
+            'date' => 'required',
             'title' => 'required|max:255',
             'activity' => 'required|string',
         ];

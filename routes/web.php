@@ -9,6 +9,7 @@ use App\Http\Controllers\CustomerDocumentController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItineraryController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\Pdf\ManifestController;
 use App\Http\Controllers\Pdf\RekomController;
 use App\Http\Controllers\UmrahPackageController;
@@ -64,6 +65,10 @@ Route::prefix('admin')->group(function () {
         Route::post('/jemaah-umrah/{customerId}/update-photo', [CustomerDocumentController::class, 'updatePhoto'])->name('admin.customerDocument.update.photo.post');
         Route::post('/jemaah-umrah/rotate-photo/{customerId}/{type}', [CustomerDocumentController::class, 'rotatePhoto'])->name('admin.customerDocument.rotate.photo');
 
+        Route::get('/jemaah-umrah/download/manifest/{packageId}', [ManifestController::class, 'generatePdfByPackageId'])->name('download.manifest');
+        Route::get('/jemaah-umrah/download/rekom-by-package-id/{packageId}', [RekomController::class, 'generateRekomByPackageId'])->name('download.rekom.by.packageId');
+        Route::get('/jemaah-umrah/download/rekom-by-customer-id/{customerId}', [RekomController::class, 'generateRekomByCustomerId'])->name('download.rekom.by.customerId');
+
         Route::get('/paket-umrah', function () {
             return redirect()->back();
         });
@@ -91,8 +96,7 @@ Route::prefix('admin')->group(function () {
         Route::put('/faq/{faqId}', [FaqController::class, 'update'])->name('admin.faq.update');
         Route::delete('/faq/{faqId}', [FaqController::class, 'destroy'])->name('admin.faq.destroy');
 
-        Route::get('/jemaah-umrah/download/manifest/{packageId}', [ManifestController::class, 'generatePdfByPackageId'])->name('download.manifest');
-        Route::get('/jemaah-umrah/download/rekom-by-package-id/{packageId}', [RekomController::class, 'generateRekomByPackageId'])->name('download.rekom.by.packageId');
-        Route::get('/jemaah-umrah/download/rekom-by-customer-id/{customerId}', [RekomController::class, 'generateRekomByCustomerId'])->name('download.rekom.by.customerId');
+        Route::get('/broadcast', [MessageController::class, 'index'])->name('admin.broadcast.index');
+        Route::post('/broadcast', [MessageController::class, 'broadcast'])->name('admin.broadcast.broadcast');
     });
 });

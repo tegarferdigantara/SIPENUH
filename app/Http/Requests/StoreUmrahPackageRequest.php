@@ -24,7 +24,7 @@ class StoreUmrahPackageRequest extends FormRequest
         return [
             'name' => 'required|string|max:255|unique:umrah_packages,name',
             'description' => 'required|string',
-            'departure_date' => 'required|date',
+            'departure_date' => 'required|date|date_format:Y-m-d',
             'duration' => 'required|integer|min:1',
             'price' => 'required|integer|min:0',
             'facility' => 'required|string',

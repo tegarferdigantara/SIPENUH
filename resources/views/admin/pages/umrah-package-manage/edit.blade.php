@@ -89,9 +89,10 @@
                                 <label class="mb-2.5 block text-black dark:text-white">
                                     Tanggal Keberangkatan <span class="text-meta-1">*</span>
                                 </label>
-                                <input type="date" name="departure_date"
-                                    value="{{ old('departure_date', $package->departure_date instanceof \DateTime ? $package->departure_date->format('Y-m-d') : $package->departure_date) }}"
-                                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+                                <input
+                                    class="form-datepicker w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                                    value="{{ old('departure_date', \Carbon\Carbon::parse($package->departure_date)->format('Y-m-d')) }}"
+                                    data-class="flatpickr-right" name="departure_date" />
                                 @error('departure_date')
                                     <p class="text-meta-1 text-sm text-black font-medium mt-2">{{ $message }}</p>
                                 @enderror
@@ -185,7 +186,7 @@
                         'list': 'bullet'
                     }]
                 ]
-            }
+            },
         });
 
         // Mengambil nilai facility dari input hidden
@@ -202,6 +203,12 @@
         form.onsubmit = function() {
             facilityInput.value = quill.root.innerHTML;
         };
+        document.addEventListener('DOMContentLoaded', function() {
+            flatpickr('.form-datepicker', {
+                dateFormat: 'Y-m-d',
+                defaultDate: '{{ old('departure_date', \Carbon\Carbon::parse($package->departure_date)->format('Y-m-d')) }}',
+            });
+        });
     </script>
 
     @include('admin.components.alerts.notification')
