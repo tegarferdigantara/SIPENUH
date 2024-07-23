@@ -35,7 +35,7 @@ class UpdateCustomerRequest extends FormRequest
             'city' => 'required|string|max:255',
             'subdistrict' => 'required|string|max:255',
             'family_number' => 'nullable|string|max:20',
-            'email' => 'nullable|string|max:255',
+            'email' => 'nullable|email|string|max:255',
             'umrah_package_id' => 'required|integer',
             'passport_number' => 'nullable|string|min:8|max:8',
             'id_number' => 'required|string|size:16|regex:/^[0-9]+$/',

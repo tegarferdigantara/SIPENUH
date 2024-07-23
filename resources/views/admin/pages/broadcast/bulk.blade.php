@@ -30,7 +30,7 @@
                             Detail
                         </h3>
                     </div>
-                    <form action="#" method="POST">
+                    <form action="{{ route('admin.broadcast.broadcast') }}" method="POST">
                         @csrf
                         <div class="p-6.5">
                             <div class="mb-4.5">
@@ -41,11 +41,11 @@
                                     <select
                                         class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 pl-5 pr-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input"
                                         :class="isOptionSelected && 'text-black dark:text-white'"
-                                        @change="isOptionSelected = true" name="target" required>
-                                        <option value="" class="text-body">Pilih Target</option>
-                                        <option value="option1" class="text-body">Option 1</option>
-                                        <option value="option2" class="text-body">Option 2</option>
-                                        <option value="option3" class="text-body">Option 3</option>
+                                        @change="isOptionSelected = true" name="umrah_package_id" required>
+                                        @foreach ($umrahPackages as $package)
+                                            <option value="{{ $package->id }}" class="text-body">{{ $package->name }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                     <span class="absolute right-4 top-1/2 z-20 -translate-y-1/2">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -57,7 +57,7 @@
                                             </g>
                                         </svg>
                                     </span>
-                                    @error('target')
+                                    @error('umrah_package_id')
                                         <p class="text-meta-1 text-sm text-black font-medium mt-2">{{ $message }}</p>
                                     @enderror
                                 </div>
@@ -65,11 +65,11 @@
 
                             <div class="mb-4.5">
                                 <label class="mb-2.5 block text-black dark:text-white">
-                                    Deskripsi
+                                    Pesan
                                 </label>
-                                <textarea rows="6" placeholder="Masukkan deskripsi paket" name="description"
-                                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">{{ old('description') }}</textarea>
-                                @error('description')
+                                <textarea rows="6" placeholder="Masukkan pesan" name="message"
+                                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">{{ old('message') }}</textarea>
+                                @error('message')
                                     <p class="text-meta-1 text-sm text-black font-medium mt-2">{{ $message }}</p>
                                 @enderror
                             </div>
@@ -97,3 +97,8 @@
         </div>
     </main>
 @endsection
+
+@push('scripts')
+    @include('admin.components.alerts.confirm')
+    @include('admin.components.alerts.notification')
+@endpush
