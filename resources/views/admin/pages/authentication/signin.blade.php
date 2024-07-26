@@ -12,8 +12,6 @@
     {{-- SweetAlert Notification --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.all.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.min.css" rel="stylesheet">
-    {{-- Axios --}}
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 </head>
 
@@ -81,14 +79,14 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
                                         Login
                                     </h2>
 
-                                    <form id="loginForm" method="POST">
+                                    <form action="{{ route('login.post') }}" method="POST">
                                         @csrf
                                         <div class="mb-4">
                                             <label
                                                 class="mb-2.5 block font-medium text-black dark:text-white">Email</label>
                                             <div class="relative">
                                                 <input type="email" placeholder="Enter your email" name="email"
-                                                    id="email"
+                                                    id="email" value="{{ old('email') }}"
                                                     class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                                                     required
                                                     pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" />
@@ -105,6 +103,10 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
                                                     </svg>
                                                 </span>
                                             </div>
+                                            @error('email')
+                                                <p class="text-meta-1 text-sm text-black font-medium mt-2">
+                                                    {{ $message }}</p>
+                                            @enderror
                                         </div>
 
                                         <div class="mb-6">
@@ -130,17 +132,21 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
                                                     </svg>
                                                 </span>
                                             </div>
+                                            @error('password')
+                                                <p class="text-meta-1 text-sm text-black font-medium mt-2">
+                                                    {{ $message }}</p>
+                                            @enderror
                                         </div>
                                         <div class="mb-5">
                                             <input type="submit" value="Sign In"
                                                 class="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 font-medium text-white transition hover:bg-opacity-90" />
                                         </div>
                                     </form>
-                                    <div id="loginMessage"></div>
                                     <div class="float-right sm: mb-5">
                                         <label :class="darkMode ? 'bg-primary' : 'bg-stroke'"
                                             class="relative m-0 block h-7.5 w-14 rounded-full">
-                                            <input type="checkbox" :value="darkMode" @change="darkMode = !darkMode"
+                                            <input type="checkbox" :value="darkMode"
+                                                @change="darkMode = !darkMode"
                                                 class="absolute top-0 z-50 m-0 h-full w-full cursor-pointer opacity-0" />
                                             <span :class="darkMode && '!right-1 !translate-x-full'"
                                                 class="absolute left-1 top-1/2 flex h-6 w-6 -translate-y-1/2 translate-x-0 items-center justify-center rounded-full bg-white shadow-switcher duration-75 ease-linear">
@@ -178,66 +184,8 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
         <!-- ===== Content Area End ===== -->
     </div>
     <!-- ===== Page Wrapper End ===== -->
-    <script>
-        const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 2000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.onmouseenter = Swal.stopTimer;
-                toast.onmouseleave = Swal.resumeTimer;
-            }
-        });
-
-
-        // admin.pages.authentication.signin.blade.php atau script terpisah
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
-            axios.post('{{ route('login.post') }}', {
-                    email: email,
-                    password: password
-                }, {
-                    headers: {
-                        'X-CSRF-TOKEN': token
-                    }
-                })
-                .then(function(response) {
-                    console.log(response);
-                    if (response.status == 200) {
-                        Toast.fire({
-                            icon: "success",
-                            title: "Login Berhasil"
-                        });
-                        setTimeout(function() {
-                            window.location.href = '{{ route('admin.dashboard') }}';
-                        }, 2000);
-                    } else {
-                        Toast.fire({
-                            icon: "error",
-                            title: "Unknown Error"
-                        });
-                    }
-                })
-                .catch(function(error) {
-                    Toast.fire({
-                        icon: "error",
-                        title: error
-                    });
-                });
-        });
-    </script>
     <script defer src="{{ asset('assets/js/bundle.js') }}"></script>
-    {{-- Axios --}}
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-
+    @include('admin.components.alerts.notification')
 </body>
 
 </html>
