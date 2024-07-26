@@ -12,6 +12,48 @@
     {{-- SweetAlert Notification --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.all.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.min.css" rel="stylesheet">
+    <style>
+        /* Tambahkan gaya ini untuk menyesuaikan ukuran elemen */
+        html {
+            font-size: 14px;
+            /* Ukuran font dasar yang lebih kecil */
+        }
+
+        body {
+            font-size: 1rem;
+            /* 1rem sekarang setara dengan 12px */
+        }
+
+        .text-2xl {
+            font-size: 1.5rem;
+            /* Sesuaikan ukuran judul */
+        }
+
+        .p-4 {
+            padding: 0.75rem;
+        }
+
+        .p-6 {
+            padding: 1rem;
+        }
+
+        .p-10 {
+            padding: 1.5rem;
+        }
+
+        /* Sesuaikan ukuran input dan tombol */
+        input,
+        button {
+            font-size: 0.875rem;
+            padding: 0.5rem 0.75rem;
+        }
+
+        /* Sesuaikan ukuran ikon */
+        svg {
+            width: 1rem;
+            height: 1rem;
+        }
+    </style>
 
 </head>
 
