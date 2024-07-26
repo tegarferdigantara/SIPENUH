@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -13,12 +15,17 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'name' => 'Admin',
-            'email' => 'admin@gmail.com',
-            'password' => bcrypt('admin'),
-            'whatsapp_number' => null,
-            'role_id' => 1
-        ]);
+        // Buat peran admin jika belum ada
+        $adminRole = Role::firstOrCreate(['name' => 'admin']);
+
+        // Buat akun admin
+        User::updateOrCreate(
+            ['email' => 'admin@gmail.com'], // Ganti dengan email admin yang diinginkan
+            [
+                'name' => 'Admin',
+                'password' => Hash::make('admin'), // Ganti dengan password yang diinginkan
+                'whatsapp_number' => '1234567890' // Opsional
+            ]
+        )->assignRole($adminRole);
     }
 }

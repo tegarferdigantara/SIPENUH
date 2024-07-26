@@ -18,15 +18,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('whatsapp_number', 20)->nullable();
-            $table->unsignedBigInteger('role_id');
             $table->timestamps();
-
-            $table->foreign('role_id')->on('roles')->references('id');
         });
-
-        Artisan::call('db:seed', [
-            '--class' => 'UserSeeder'
-        ]);
     }
 
     /**
