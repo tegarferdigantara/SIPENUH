@@ -26,9 +26,4 @@ class HomeController extends Controller
 
         return view('admin.pages.dashboard', compact('customers', 'registeredJemaah', 'totalActivePackage'));
     }
-
-    public function setting()
-    {
-        return view('admin.pages.user-manage.account');
-    }
 }
