@@ -99,11 +99,6 @@
             modules: {
                 toolbar: [
                     [{
-                        'header': [1, 2, false]
-                    }],
-                    ['bold', 'italic', 'underline'],
-                    ['link'],
-                    [{
                         'list': 'ordered'
                     }, {
                         'list': 'bullet'
@@ -129,8 +124,9 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             flatpickr('.form-datepicker', {
-                dateFormat: 'Y-m-d',
-                defaultDate: '{{ old('date', \Carbon\Carbon::parse($itinerary->date)->format('Y-m-d')) }}',
+                enableTime: true,
+                dateFormat: 'Y-m-d H:i',
+                defaultDate: '{{ old('date', \Carbon\Carbon::parse($itinerary->date)->format('Y-m-d H:i')) }}',
             });
         });
     </script>

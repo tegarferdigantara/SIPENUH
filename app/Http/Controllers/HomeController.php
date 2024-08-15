@@ -22,8 +22,15 @@ class HomeController extends Controller
             ->orderBy('created_at')
             ->get();
 
+        $customersWithoutPassport = $customer->with(['umrahPackage', 'customerDocument'])
+            ->whereHas('customerDocument', function ($query) {
+                $query->whereNull('passport_number');
+            })
+            ->orWhereDoesntHave('customerDocument')
+            ->get();
+
         $customers = CustomerResource::collection($customers);
 
-        return view('admin.pages.dashboard', compact('customers', 'registeredJemaah', 'totalActivePackage'));
+        return view('admin.pages.dashboard', compact('customers', 'registeredJemaah', 'totalActivePackage', 'customersWithoutPassport'));
     }
 }

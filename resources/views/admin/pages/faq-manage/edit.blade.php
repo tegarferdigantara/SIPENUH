@@ -37,7 +37,7 @@
                                         <label class="mb-2.5 block text-black dark:text-white">
                                             Pertanyaan <span class="text-meta-1">*</span>
                                         </label>
-                                        <input type="text" name="question" required
+                                        <input type="text" name="question" required autofocus
                                             value="{{ old('question', $faqData->question) }}"
                                             class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary @error('question') border-meta-1 @enderror">
                                         @error('question')
@@ -79,11 +79,6 @@
             theme: 'snow',
             modules: {
                 toolbar: [
-                    [{
-                        'header': [1, 2, false]
-                    }],
-                    ['bold', 'italic', 'underline'],
-                    ['link'],
                     [{
                         'list': 'ordered'
                     }, {

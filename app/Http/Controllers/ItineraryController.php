@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateItineraryRequest;
 use App\Http\Resources\ItineraryResource;
 use App\Models\UmrahPackage;
 use Carbon\Carbon;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 
 class ItineraryController extends Controller
@@ -58,7 +59,7 @@ class ItineraryController extends Controller
      */
     public function show(int $umrahPackageNumber, Itinerary $itinerary): JsonResponse
     {
-        $itineraries = $itinerary->where('umrah_package_id', $umrahPackageNumber)->with('umrahPackage')->get();
+        $itineraries = $itinerary->where('umrah_package_id', $umrahPackageNumber)->with('umrahPackage')->orderBy('date', 'asc')->get();
 
         return ItineraryResource::collection($itineraries)->response()->setStatusCode(200);
     }

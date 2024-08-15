@@ -109,7 +109,7 @@
                                         @foreach ($itineraries as $itinerary)
                                             @php
                                                 $date = \Carbon\Carbon::parse($itinerary->date);
-                                                $formattedDay = $date->translatedFormat('l'); // Hari dalam bahasa Inggris
+                                                $formattedDay = $date->translatedFormat('l'); // Hari dalam bahasa Indonesia
                                                 $formattedDate = $date->translatedFormat('d F Y'); // Format tanggal
                                             @endphp
 
@@ -125,9 +125,18 @@
                                             {{-- Tampilkan detail itinerary --}}
                                             <li
                                                 class="border-b border-stroke px-2 py-3 last:border-b-0 dark:border-strokedark flex justify-between items-center">
-                                                <div>
-                                                    <strong>{{ $itinerary->title }}</strong>
-                                                    <p>{!! $itinerary->activity !!}</p>
+                                                <div class="flex-1">
+                                                    <div class="flex justify-between items-center mb-2">
+                                                        <strong class="text-base font-semibold">
+                                                            {{ $itinerary->title }}
+                                                        </strong>
+                                                        <span class="text-sm text-gray-500">
+                                                            Pukul {{ $date->translatedFormat('H:i') }}
+                                                        </span>
+                                                    </div>
+                                                    <p class="text-sm">
+                                                        {!! $itinerary->activity !!}
+                                                    </p>
                                                 </div>
                                                 <div class="flex items-center space-x-2">
                                                     <a class="hover:text-primary"
@@ -141,22 +150,22 @@
                                                             xml:space="preserve">
                                                             <path
                                                                 d="M62.2,11.9c0-0.8-0.3-1.6-0.9-2.2c-1.2-1.2-2.4-2.4-3.5-3.6c-1.1-1.1-2.1-2.2-3.2-3.2c-0.5-0.6-1.1-1-1.9-1.1
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        c-0.9-0.1-1.7,0.1-2.4,0.7l-6.8,6.8H8.1c-3.4,0-6.3,2.8-6.3,6.3V56c0,3.4,2.8,6.3,6.3,6.3h40.5c3.4,0,6.3-2.8,6.3-6.3V20.5l6.5-6.5
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        C61.9,13.4,62.2,12.7,62.2,11.9z M32.8,36c-0.1,0.1-0.1,0.1-0.2,0.1l-7.2,2.4l2.4-7.2c0-0.1,0.1-0.1,0.1-0.2l18-18l5,4.9L32.8,36z
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        M50.3,56c0,1-0.8,1.8-1.8,1.8H8.1c-1,0-1.8-0.8-1.8-1.8V15.5c0-1,0.8-1.8,1.8-1.8h30.8L24.7,28c-0.5,0.5-1,1.2-1.2,2l-3.7,11.2
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        c-0.3,0.8-0.1,1.5,0.3,2.2c0.3,0.4,0.9,1,2,1h0.4l11.5-3.8c0.7-0.2,1.4-0.7,1.9-1.2L50.3,25V56z M54,14.9L49,10l3.1-3.1
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        c0.8,0.8,4.1,4.1,4.9,5L54,14.9z" />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    c-0.9-0.1-1.7,0.1-2.4,0.7l-6.8,6.8H8.1c-3.4,0-6.3,2.8-6.3,6.3V56c0,3.4,2.8,6.3,6.3,6.3h40.5c3.4,0,6.3-2.8,6.3-6.3V20.5l6.5-6.5
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    C61.9,13.4,62.2,12.7,62.2,11.9z M32.8,36c-0.1,0.1-0.1,0.1-0.2,0.1l-7.2,2.4l2.4-7.2c0-0.1,0.1-0.1,0.1-0.2l18-18l5,4.9L32.8,36z
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    M50.3,56c0,1-0.8,1.8-1.8,1.8H8.1c-1,0-1.8-0.8-1.8-1.8V15.5c0-1,0.8-1.8,1.8-1.8h30.8L24.7,28c-0.5,0.5-1,1.2-1.2,2l-3.7,11.2
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    c-0.3,0.8-0.1,1.5,0.3,2.2c0.3,0.4,0.9,1,2,1h0.4l11.5-3.8c0.7-0.2,1.4-0.7,1.9-1.2L50.3,25V56z M54,14.9L49,10l3.1-3.1
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    c0.8,0.8,4.1,4.1,4.9,5L54,14.9z" />
                                                         </svg>
                                                     </a>
 
                                                     <form
                                                         action="{{ route('admin.package.itinerary.destroy', ['packageId' => $package->id, 'itineraryId' => $itinerary->id]) }}"
-                                                        id="delete-form" method="POST">
+                                                        id="delete-form-{{ $itinerary->id }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                     </form>
                                                     <button class="hover:text-primary" title="Delete Itinerary"
-                                                        onclick="confirmDelete('delete-form')">
+                                                        onclick="confirmDelete('delete-form-{{ $itinerary->id }}')">
                                                         <svg class="fill-current" width="18" height="18"
                                                             viewBox="0 0 18 18" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
@@ -197,11 +206,6 @@
             modules: {
                 toolbar: [
                     [{
-                        'header': [1, 2, false]
-                    }],
-                    ['bold', 'italic', 'underline'],
-                    ['link'], // Tidak ada opsi gambar
-                    [{
                         'list': 'ordered'
                     }, {
                         'list': 'bullet'
@@ -218,7 +222,8 @@
         };
         document.addEventListener('DOMContentLoaded', function() {
             flatpickr('.form-datepicker', {
-                dateFormat: 'Y-m-d',
+                enableTime: true,
+                dateFormat: 'Y-m-d H:i',
             });
         });
     </script>

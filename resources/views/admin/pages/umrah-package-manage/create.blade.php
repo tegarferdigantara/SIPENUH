@@ -37,8 +37,9 @@
                                 <label class="mb-2.5 block text-black dark:text-white">
                                     Nama Paket <span class="text-meta-1">*</span>
                                 </label>
-                                <input type="text" placeholder="Masukkan nama paket" name="name"
-                                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+                                <input type="text" placeholder="Masukkan nama paket" name="name" autofocus
+                                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                                    required />
                                 @error('name')
                                     <p class="text-meta-1 text-sm text-black font-medium mt-2">{{ $message }}</p>
                                 @enderror
@@ -49,7 +50,8 @@
                                     Harga <span class="text-meta-1">*</span>
                                 </label>
                                 <input type="number" placeholder="Masukkan harga paket" name="price"
-                                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+                                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                                    required />
                                 @error('price')
                                     <p class="text-meta-1 text-sm text-black font-medium mt-2">{{ $message }}</p>
                                 @enderror
@@ -60,7 +62,7 @@
                                     Kuota <span class="text-meta-1">*</span>
                                 </label>
                                 <input type="number" placeholder="Masukkan kuota paket" name="quota"
-                                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+                                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"required />
                                 @error('quota')
                                     <p class="text-meta-1 text-sm text-black font-medium mt-2">{{ $message }}</p>
                                 @enderror
@@ -68,9 +70,9 @@
 
                             <div class="mb-4.5">
                                 <label class="mb-2.5 block text-black dark:text-white">
-                                    Deskripsi
+                                    Deskripsi <span class="text-meta-1">*</span>
                                 </label>
-                                <textarea rows="6" placeholder="Masukkan deskripsi paket" name="description"
+                                <textarea rows="6" placeholder="Masukkan deskripsi paket" name="description" required
                                     class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"></textarea>
                                 @error('description')
                                     <p class="text-meta-1 text-sm text-black font-medium mt-2">{{ $message }}</p>
@@ -84,7 +86,8 @@
                                 <div class="relative">
                                     <input
                                         class="form-datepicker w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                                        data-class="flatpickr-right" name="departure_date" placeholder="yyyy/mm/dd" />
+                                        data-class="flatpickr-right" name="departure_date" placeholder="yyyy/mm/dd"
+                                        required />
                                     <div class="pointer-events-none absolute inset-0 left-auto right-5 flex items-center">
                                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -104,7 +107,8 @@
                                     Durasi (Hari) <span class="text-meta-1">*</span>
                                 </label>
                                 <input type="number" placeholder="Masukkan durasi paket" name="duration"
-                                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+                                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                                    required />
                                 @error('duration')
                                     <p class="text-meta-1 text-sm text-black font-medium mt-2">{{ $message }}</p>
                                 @enderror
@@ -112,10 +116,10 @@
 
                             <div class="mb-4.5">
                                 <label class="mb-2.5 block text-black dark:text-white">
-                                    Fasilitas
+                                    Fasilitas <span class="text-meta-1">*</span>
                                 </label>
                                 <div id="editor-container" style="height: 200px;"></div>
-                                <input type="hidden" name="facility" id="facility">
+                                <input type="hidden" name="facility" id="facility" required>
                                 @error('facility')
                                     <p class="text-meta-1 text-sm text-black font-medium mt-2">{{ $message }}</p>
                                 @enderror
@@ -126,7 +130,8 @@
                                     Destinasi Tujuan <span class="text-meta-1">*</span>
                                 </label>
                                 <input type="text" placeholder="Masukkan destinasi tujuan" name="destination"
-                                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+                                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                                    required />
                                 @error('destination')
                                     <p class="text-meta-1 text-sm text-black font-medium mt-2">{{ $message }}</p>
                                 @enderror
@@ -137,7 +142,8 @@
                                     Status
                                 </label>
                                 <select name="status"
-                                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
+                                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                                    required>
                                     <option value="ACTIVE">Aktif</option>
                                     <option value="FULL">Full</option>
                                     <option value="CLOSED">Tutup</option>
@@ -169,11 +175,6 @@
             theme: 'snow',
             modules: {
                 toolbar: [
-                    [{
-                        'header': [1, 2, false]
-                    }],
-                    ['bold', 'italic', 'underline'],
-                    ['link'], // Tidak ada opsi gambar
                     [{
                         'list': 'ordered'
                     }, {

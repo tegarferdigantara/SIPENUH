@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('whatsapp_number', 20)->nullable();
             $table->timestamps();
         });
+
+        Artisan::call('db:seed', ['--class' => 'RolesAndPermissionsSeeder']);
     }
 
     /**

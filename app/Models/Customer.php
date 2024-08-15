@@ -44,8 +44,8 @@ class Customer extends Model
     {
         return $this->belongsTo(UmrahPackage::class, 'umrah_package_id', 'id');
     }
-    public function documentRegistry(): HasMany
+    public function testimonial(): HasMany
     {
-        return $this->hasMany(DocumentRegistry::class, 'customer_id', 'id');
+        return $this->hasMany(Testimonial::class, 'customer_id', 'id');
     }
 }

@@ -93,6 +93,7 @@ class CustomerController extends Controller
 
 
         $customer->registration_number = $registrationNumber;
+        $customer->umrahPackage->decrement('quota', 1);
         $customer->save();
 
         return (new CustomerResource($customer))->response()->setStatusCode(201);

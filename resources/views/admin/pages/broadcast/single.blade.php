@@ -7,7 +7,7 @@
                 <!-- Breadcrumb Start -->
                 <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <h2 class="text-title-md2 font-bold text-black dark:text-white">
-                        Pesan WhatsApp - Siaran
+                        Pesan WhatsApp - Tunggal
                     </h2>
 
                     <nav>
@@ -16,7 +16,7 @@
                                 <a class="font-medium" href="{{ route('admin.dashboard') }}">Dashboard /</a>
                             </li>
                             <li class="font-medium text-primary">
-                                Pesan Siaran
+                                Pesan Tunggal
                             </li>
                         </ol>
                     </nav>
@@ -30,25 +30,24 @@
                             Detail
                         </h3>
                     </div>
-                    <form action="{{ route('admin.message.broadcast.store') }}" method="POST">
+                    <form action="{{ route('admin.message.single.store') }}" method="POST">
                         @csrf
                         <div class="p-6.5">
                             <div class="mb-4.5">
                                 <label class="mb-2.5 block text-black dark:text-white">
-                                    Target Pesan (Jemaah-jemaah Yang ada didalam paket umrah) <span
-                                        class="text-meta-1">*</span>
+                                    Target Pesan (1 Jemaah) <span class="text-meta-1">*</span>
                                 </label>
                                 <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-white dark:bg-form-input">
                                     <select autofocus
                                         class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 pl-5 pr-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input"
                                         :class="isOptionSelected && 'text-black dark:text-white'"
-                                        @change="isOptionSelected = true" name="umrah_package_id" required>
-                                        @forelse ($umrahPackages as $package)
-                                            <option value="{{ $package->id }}" class="text-body">{{ $package->name }}
-                                                ({{ $package->customers()->count() }} Jemaah)
+                                        @change="isOptionSelected = true" name="whatsapp_number" required>
+                                        @forelse ($customers as $customer)
+                                            <option value="{{ $customer->whatsapp_number }}" class="text-body">
+                                                {{ $customer->full_name }} (Jemaah {{ $customer->umrahPackage->name }})
                                             </option>
                                         @empty
-                                            <option value="" class="text-body">Tidak ada paket umrah</option>
+                                            <option value="" class="text-body">Tidak ada jemaah</option>
                                         @endforelse
                                     </select>
                                     <span class="absolute right-4 top-1/2 z-20 -translate-y-1/2">
@@ -61,7 +60,7 @@
                                             </g>
                                         </svg>
                                     </span>
-                                    @error('umrah_package_id')
+                                    @error('whatsapp_number')
                                         <p class="text-meta-1 text-sm text-black font-medium mt-2">{{ $message }}</p>
                                     @enderror
                                 </div>
@@ -90,11 +89,12 @@
                             </div>
                             <form id="messageForm">
                                 <!-- Form fields here -->
-                                <button id="sendMessageButton" type="submit"
+                                <button id="sendMessageButton" type="button"
                                     class="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray">
                                     Kirim Pesan
                                 </button>
                             </form>
+
                         </div>
                     </form>
 

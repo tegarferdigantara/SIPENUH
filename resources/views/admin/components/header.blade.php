@@ -90,70 +90,59 @@
                     </label>
                     <!-- Dark Mode Toggler -->
                 </li>
-
                 <!-- WhatsApp Area -->
-                {{-- <li class="relative" x-data="whatsappQR()" @click.outside="dropdownOpen = false">
-                    <a class="relative flex h-8.5 w-8.5 items-center justify-center rounded-full border-[0.5px] border-stroke bg-gray hover:text-primary dark:border-strokedark dark:bg-meta-4 dark:text-white"
-                        href="#" @click.prevent="dropdownOpen = !dropdownOpen; notifying = false;">
+                <li id="whatsapp-dropdown" class="relative" x-data="{ dropdownOpen: false, isConnected: {{ $whatsappStatus ? 'true' : 'false' }} }" @click.away="dropdownOpen = false">
+                    <button aria-label="Toggle WhatsApp Status Dropdown"
+                        class="relative flex h-8.5 w-8.5 items-center justify-center rounded-full border-[0.5px] border-stroke bg-gray hover:text-primary dark:border-strokedark dark:bg-meta-4 dark:text-white"
+                        @click="dropdownOpen = !dropdownOpen">
 
-                        <span :class="!notifying && 'hidden'"
-                            class="absolute -top-0.5 right-0 z-1 h-2 w-2 rounded-full bg-meta-1">
-                            <span
-                                class="absolute -z-1 inline-flex h-full w-full animate-ping rounded-full bg-meta-1 opacity-75"></span>
+                        <span :class="{ 'bg-meta-3': isConnected, 'bg-meta-1': !isConnected }"
+                            class="absolute -top-0.5 right-0 z-1 h-2 w-2 rounded-full">
+                            <span class="absolute -z-1 inline-flex h-full w-full animate-ping rounded-full opacity-75"
+                                :class="{ 'bg-meta-3': isConnected, 'bg-meta-1': !isConnected }">
+                            </span>
                         </span>
 
-                        <svg class="fill-current duration-300 ease-in-out" fill="none" width="18" height="18"
+                        <svg class="fill-current duration-300 ease-in-out" width="18" height="18"
                             viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M54 9.90039C48.2 4.10039 40.3 0.900391 32.2 0.900391C15.2 0.900391 1.3 14.7004 1.3 31.7004C1.3 37.2004 2.7 42.4004 5.4 47.2004L1 63.1004L17.5 58.9004C22 61.3004 27.1 62.7004 32.3 62.7004C49.2 62.6004 63 48.8004 63 31.7004C63 23.5004 59.8 15.8004 54 9.90039ZM32.1 57.4004C27.6 57.4004 22.9 56.1004 19 53.7004L18 53.1004L8.3 55.6004L11 46.2004L10.4 45.2004C7.9 41.1004 6.5 36.3004 6.5 31.5004C6.5 17.4004 17.9 6.00039 32.1 6.00039C38.9 6.00039 45.3 8.70039 50.1 13.5004C54.9 18.3004 57.6 24.8004 57.6 31.7004C57.8 46.0004 46.2 57.4004 32.1 57.4004ZM46.2 38.2004C45.4 37.8004 41.7 35.9004 40.8 35.8004C40.1 35.5004 39.5 35.4004 39.1 36.2004C38.7 37.0004 37.1 38.6004 36.7 39.2004C36.3 39.6004 35.9 39.8004 35 39.3004C34.2 38.9004 31.8 38.2004 28.8 35.4004C26.5 33.4004 24.9 30.9004 24.6 30.0004C24.2 29.2004 24.5 28.9004 25 28.4004C25.4 28.0004 25.8 27.6004 26.1 27.0004C26.5 26.6004 26.5 26.2004 26.9 25.7004C27.3 25.3004 27 24.7004 26.8 24.3004C26.5 23.9004 25.1 20.1004 24.4 18.5004C23.8 16.9004 23.1 17.2004 22.7 17.2004C22.3 17.2004 21.7 17.2004 21.3 17.2004C20.9 17.2004 19.9 17.3004 19.3 18.2004C18.6 19.0004 16.6 20.9004 16.6 24.7004C16.6 28.5004 19.3 32.0004 19.8 32.7004C20.2 33.1004 25.3 41.0004 32.9 44.4004C34.7 45.2004 36.1 45.7004 37.3 46.1004C39.1 46.7004 40.8 46.5004 42.1 46.4004C43.6 46.3004 46.6 44.6004 47.3 42.7004C47.9 41.0004 47.9 39.3004 47.7 39.0004C47.5 38.8004 46.9 38.5004 46.2 38.2004Z" />
                         </svg>
+                    </button>
 
-                    </a>
                     <!-- Dropdown Start -->
-                    <div x-show="dropdownOpen"
-                        class="absolute -right-27 mt-2.5 flex h-90 w-75 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark sm:right-0 sm:w-80">
-                        <div class="px-4.5 py-3">
-                            <h5 class="text-sm font-medium text-bodydark2">WhatsApp Connection</h5>
+                    <div x-show="dropdownOpen" x-cloak x-transition:enter="transition ease-out duration-300"
+                        x-transition:enter-start="opacity-0 transform scale-90"
+                        x-transition:enter-end="opacity-100 transform scale-100"
+                        x-transition:leave="transition ease-in duration-300"
+                        x-transition:leave-start="opacity-100 transform scale-100"
+                        x-transition:leave-end="opacity-0 transform scale-90"
+                        class="absolute right-0 mt-2.5 flex h-40 w-64 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+                        <div class="px-3.5 py-3 text-center">
+                            <h5 class="text-sm font-medium text-bodydark2">WhatsApp Status</h5>
                         </div>
 
-                        <div class="flex flex-col items-center justify-center p-4">
-                            <template x-if="!isConnected">
-                                <div>
-                                    <div id="qrcode" class="w-48 h-48 bg-gray-200 flex items-center justify-center">
-                                        <!-- QR code will be inserted here -->
-                                        <span class="text-sm text-gray-500">Loading QR Code...</span>
-                                    </div>
-                                    <p class="mt-4 text-sm text-center text-gray-600 dark:text-gray-400">
-                                        Scan this QR code with your WhatsApp app to connect.
-                                    </p>
-                                </div>
-                            </template>
-                            <template x-if="isConnected">
-                                <div class="text-center">
-                                    <svg class="w-16 h-16 mx-auto text-green-500" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                    </svg>
-                                    <p class="mt-4 text-lg font-medium text-green-600">WhatsApp Connected!</p>
-                                    <p class="mt-2 text-sm text-gray-600">You can now use WhatsApp features.</p>
-                                </div>
-                            </template>
-                        </div>
+                        <div class="flex flex-col items-center justify-center p-4 space-y-2">
+                            <div x-show="!isConnected" class="text-center">
+                                <p class="text-lg font-medium text-red-600">WhatsApp Disconnected</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">WhatsApp Chatbot Asisten &
+                                    Pesan Siaran/Tunggal tidak aktif</p>
+                            </div>
 
-                        <div class="px-4.5 py-3 mt-auto border-t border-stroke dark:border-strokedark">
-                            <button x-show="!isConnected" @click="connect"
-                                class="w-full px-4 py-2 text-sm font-medium text-white bg-primary rounded-sm hover:bg-opacity-90">
-                                Connect
-                            </button>
-                            <button x-show="isConnected" @click="disconnect"
-                                class="w-full px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-sm hover:bg-opacity-90">
-                                Disconnect
-                            </button>
+                            <div x-show="isConnected" class="text-center">
+                                <svg class="w-16 h-16 mx-auto text-green-500" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <p class="mt-4 text-lg font-medium text-green-600">WhatsApp Connected!</p>
+                                <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">WhatsApp Chatbot Asisten &
+                                    Pesan Siaran/Tunggal telah aktif!</p>
+                            </div>
                         </div>
                     </div>
                     <!-- Dropdown End -->
-                </li> --}}
+                </li>
                 <!-- WhatsApp Area -->
             </ul>
 
@@ -203,8 +192,8 @@
                         @csrf
                         <button
                             class="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
-                            <svg class="fill-current" width="22" height="22" viewBox="0 0 22 22" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
+                            <svg class="fill-current" width="22" height="22" viewBox="0 0 22 22"
+                                fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M15.5375 0.618744H11.6531C10.7594 0.618744 10.0031 1.37499 10.0031 2.26874V4.64062C10.0031 5.05312 10.3469 5.39687 10.7594 5.39687C11.1719 5.39687 11.55 5.05312 11.55 4.64062V2.23437C11.55 2.16562 11.5844 2.13124 11.6531 2.13124H15.5375C16.3625 2.13124 17.0156 2.78437 17.0156 3.60937V18.3562C17.0156 19.1812 16.3625 19.8344 15.5375 19.8344H11.6531C11.5844 19.8344 11.55 19.8 11.55 19.7312V17.3594C11.55 16.9469 11.2062 16.6031 10.7594 16.6031C10.3125 16.6031 10.0031 16.9469 10.0031 17.3594V19.7312C10.0031 20.625 10.7594 21.3812 11.6531 21.3812H15.5375C17.2219 21.3812 18.5625 20.0062 18.5625 18.3562V3.64374C18.5625 1.95937 17.1875 0.618744 15.5375 0.618744Z"
                                     fill="" />

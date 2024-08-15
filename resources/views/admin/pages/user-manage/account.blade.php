@@ -98,8 +98,8 @@
                                             </span>
                                             <input
                                                 class="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-4.5 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
-                                                type="email" name="email" id="email" placeholder="Email"
-                                                value="{{ old('email', $user->email) }}" />
+                                                type="email" name="email" id="email"
+                                                placeholder="{{ $user->email }}" disabled />
                                             @error('email')
                                                 <div class="text-meta-1 text-sm mt-1">
                                                     {{ $message }}
@@ -136,7 +136,7 @@
                                         <input
                                             class="w-full rounded border border-stroke bg-gray px-4.5 py-3 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
                                             type="password" name="current_password" id="current_password"
-                                            placeholder="Password Sekarang" />
+                                            placeholder="Password Sekarang" required />
                                         @error('current_password', 'updatePassword')
                                             <div class="text-meta-1 text-sm mb-3">
                                                 {{ $message }}
@@ -148,8 +148,9 @@
                                             for="password">Password Baru</label>
                                         <input
                                             class="w-full rounded border border-stroke bg-gray px-4.5 py-3 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
-                                            type="password" name="password" id="password"
-                                            placeholder="Password Baru" />
+                                            type="password" name="password" id="password" placeholder="Password Baru"
+                                            required />
+                                        <small id="passwordFeedback" class="text-success"></small>
                                         @error('password', 'updatePassword')
                                             <div class="text-meta-1 text-sm mb-3">
                                                 {{ $message }}
@@ -162,7 +163,7 @@
                                         <input
                                             class="w-full rounded border border-stroke bg-gray px-4.5 py-3 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
                                             type="password" name="password_confirmation" id="password_confirmation"
-                                            placeholder="Konfirmasi Password Baru" />
+                                            placeholder="Konfirmasi Password Baru" required />
                                         @error('password_confirmation', 'updatePassword')
                                             <div class="text-meta-1 text-sm mb-3">
                                                 {{ $message }}
@@ -189,5 +190,25 @@
 @endsection
 
 @push('scripts')
+    <script>
+        function validatePassword(password) {
+            const errors = [];
+            if (password.length < 8) errors.push('Password terlalu pendek.');
+            if (!/[A-Z]/.test(password)) errors.push('Harus mengandung huruf besar.');
+            if (!/[a-z]/.test(password)) errors.push('Harus mengandung huruf kecil.');
+            if (!/[0-9]/.test(password)) errors.push('Harus mengandung angka.');
+            if (!/[!@#$%^&*()_+{}\[\]:;"\'<>,.?]/.test(password)) errors.push('Harus mengandung karakter khusus.');
+
+            return errors;
+        }
+
+        const passwordInput = document.getElementById('password');
+        const feedback = document.getElementById('passwordFeedback');
+
+        passwordInput.addEventListener('input', () => {
+            const errors = validatePassword(passwordInput.value);
+            feedback.textContent = errors.length > 0 ? errors.join(' ') : 'Password kuat.';
+        });
+    </script>
     @include('admin.components.alerts.notification')
 @endpush

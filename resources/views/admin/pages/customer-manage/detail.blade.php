@@ -50,10 +50,10 @@
                                             <g>
                                                 <path
                                                     d="M60,44c-1.2,0-2.3,1-2.3,2.3v8.9c0,0.9-0.7,1.6-1.6,1.6H7.9c-0.9,0-1.6-0.7-1.6-1.6v-8.9C6.3,45,5.2,44,4,44
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          s-2.3,1-2.3,2.3v8.9c0,3.4,2.7,6.1,6.1,6.1h48.3c3.4,0,6.1-2.7,6.1-6.1v-8.9C62.3,45,61.2,44,60,44z" />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      s-2.3,1-2.3,2.3v8.9c0,3.4,2.7,6.1,6.1,6.1h48.3c3.4,0,6.1-2.7,6.1-6.1v-8.9C62.3,45,61.2,44,60,44z" />
                                                 <path
                                                     d="M30.4,46.5c0.4,0.4,1,0.6,1.6,0.6s1.1-0.2,1.6-0.6l14.5-14.1c0.9-0.9,0.9-2.3,0-3.2c-0.9-0.9-2.3-0.9-3.2,0L34.3,39.6V5
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          c0-1.2-1-2.3-2.3-2.3c-1.2,0-2.3,1-2.3,2.3v34.6L19.1,29.2c-0.9-0.9-2.3-0.8-3.2,0c-0.9,0.9-0.8,2.3,0,3.2L30.4,46.5z" />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      c0-1.2-1-2.3-2.3-2.3c-1.2,0-2.3,1-2.3,2.3v34.6L19.1,29.2c-0.9-0.9-2.3-0.8-3.2,0c-0.9,0.9-0.8,2.3,0,3.2L30.4,46.5z" />
                                             </g>
                                         </svg>
                                     </span>
@@ -187,9 +187,9 @@
                                             class="w-full rounded border border-stroke bg-gray px-4.5 py-3 font-medium text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
                                             type="text" name="whatsapp_number" id="whatsapp_number"
                                             value="{{ $customer->whatsapp_number }}" readonly disabled />
-                                        <a class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-success text-white text-xs font-bold rounded px-2 py-1 flex items-center gap-1 hover:bg-opacity-90"
-                                            href="#">
-
+                                        <button
+                                            class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-success text-white text-xs font-bold rounded px-2 py-1 flex items-center gap-1 hover:bg-opacity-90"
+                                            id="sendMessageButton">
                                             <svg fill="#ffffff" width="20" height="20" viewBox="0 0 64 64"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
@@ -197,7 +197,7 @@
                                             </svg>
 
                                             Kirim Pesan
-                                        </a>
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="mb-5.5">
@@ -282,11 +282,11 @@
                                                 xml:space="preserve">
                                                 <path
                                                     d="M62.2,11.9c0-0.8-0.3-1.6-0.9-2.2c-1.2-1.2-2.4-2.4-3.5-3.6c-1.1-1.1-2.1-2.2-3.2-3.2c-0.5-0.6-1.1-1-1.9-1.1
-                                                                                                                                                                                                    c-0.9-0.1-1.7,0.1-2.4,0.7l-6.8,6.8H8.1c-3.4,0-6.3,2.8-6.3,6.3V56c0,3.4,2.8,6.3,6.3,6.3h40.5c3.4,0,6.3-2.8,6.3-6.3V20.5l6.5-6.5
-                                                                                                                                                                                                    C61.9,13.4,62.2,12.7,62.2,11.9z M32.8,36c-0.1,0.1-0.1,0.1-0.2,0.1l-7.2,2.4l2.4-7.2c0-0.1,0.1-0.1,0.1-0.2l18-18l5,4.9L32.8,36z
-                                                                                                                                                                                                    M50.3,56c0,1-0.8,1.8-1.8,1.8H8.1c-1,0-1.8-0.8-1.8-1.8V15.5c0-1,0.8-1.8,1.8-1.8h30.8L24.7,28c-0.5,0.5-1,1.2-1.2,2l-3.7,11.2
-                                                                                                                                                                                                    c-0.3,0.8-0.1,1.5,0.3,2.2c0.3,0.4,0.9,1,2,1h0.4l11.5-3.8c0.7-0.2,1.4-0.7,1.9-1.2L50.3,25V56z M54,14.9L49,10l3.1-3.1
-                                                                                                                                                                                                    c0.8,0.8,4.1,4.1,4.9,5L54,14.9z" />
+                                                                                                                                                                                                                                                                                c-0.9-0.1-1.7,0.1-2.4,0.7l-6.8,6.8H8.1c-3.4,0-6.3,2.8-6.3,6.3V56c0,3.4,2.8,6.3,6.3,6.3h40.5c3.4,0,6.3-2.8,6.3-6.3V20.5l6.5-6.5
+                                                                                                                                                                                                                                                                                C61.9,13.4,62.2,12.7,62.2,11.9z M32.8,36c-0.1,0.1-0.1,0.1-0.2,0.1l-7.2,2.4l2.4-7.2c0-0.1,0.1-0.1,0.1-0.2l18-18l5,4.9L32.8,36z
+                                                                                                                                                                                                                                                                                M50.3,56c0,1-0.8,1.8-1.8,1.8H8.1c-1,0-1.8-0.8-1.8-1.8V15.5c0-1,0.8-1.8,1.8-1.8h30.8L24.7,28c-0.5,0.5-1,1.2-1.2,2l-3.7,11.2
+                                                                                                                                                                                                                                                                                c-0.3,0.8-0.1,1.5,0.3,2.2c0.3,0.4,0.9,1,2,1h0.4l11.5-3.8c0.7-0.2,1.4-0.7,1.9-1.2L50.3,25V56z M54,14.9L49,10l3.1-3.1
+                                                                                                                                                                                                                                                                                c0.8,0.8,4.1,4.1,4.9,5L54,14.9z" />
                                             </svg>
                                         </span>
                                         Edit Data Jemaah
@@ -411,3 +411,71 @@
         </div>
     </main>
 @endsection
+
+@push('scripts')
+    <script>
+        document.getElementById('sendMessageButton').addEventListener('click', function() {
+            const whatsappNumber = document.getElementById('whatsapp_number').value;
+            Swal.fire({
+                title: 'Kirim Pesan',
+                html: `
+                <textarea id="swal-message" class="swal2-textarea" placeholder="Pesan"></textarea>
+                <input id="swal-delay" type="number" class="swal2-input" placeholder="Delay (detik)" min="15" value="15">
+            `,
+                focusConfirm: false,
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Kirim',
+                cancelButtonText: 'Batal',
+                preConfirm: () => {
+                    const message = Swal.getPopup().querySelector('#swal-message').value;
+                    const delay = Swal.getPopup().querySelector('#swal-delay').value;
+                    if (!message) {
+                        Swal.showValidationMessage('Pesan harus diisi');
+                    }
+                    if (!delay || delay < 15) {
+                        Swal.showValidationMessage('Delay minimal 15 detik');
+                    }
+                    return {
+                        message,
+                        delay
+                    };
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const {
+                        message,
+                        delay
+                    } = result.value;
+                    fetch('{{ route('admin.message.single.store') }}', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                                    .getAttribute('content')
+                            },
+                            body: JSON.stringify({
+                                message: message,
+                                whatsapp_number: whatsappNumber,
+                                delay: parseInt(delay)
+                            })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                Swal.fire('Sukses!', data.message, 'success');
+                            } else {
+                                Swal.fire('Gagal!', data.message ||
+                                    'Terjadi kesalahan saat mengirim pesan.', 'error');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            Swal.fire('Gagal!', 'Terjadi kesalahan saat mengirim pesan.', 'error');
+                        });
+                }
+            });
+        });
+    </script>
+@endpush

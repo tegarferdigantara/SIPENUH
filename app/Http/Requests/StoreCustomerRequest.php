@@ -79,22 +79,22 @@ class StoreCustomerRequest extends FormRequest
     public function messages()
     {
         return [
-            'full_name.required' => 'Kolom [Nama Lengkap] pada Pendaftaran Umrah Wajib diisi.',
-            'gender.required' => 'Kolom [Jenis Kelamin] pada Pendaftaran Umrah Wajib diisi.',
-            'birth_place.required' => 'Kolom [Tempat Lahir] pada Pendaftaran Umrah Wajib diisi.',
-            'birth_date.required' => 'Kolom [Tanggal Lahir] pada Pendaftaran Umrah Wajib diisi.',
-            'father_name.required' => 'Kolom [Nama Ayah] pada Pendaftaran Umrah Wajib diisi.',
-            'mother_name.required' => 'Kolom [Nama Ibu] pada Pendaftaran Umrah Wajib diisi.',
-            'profession.required' => 'Kolom [Pekerjaan] pada Pendaftaran Umrah Wajib diisi.',
-            'address.required' => 'Kolom [Alamat] pada Pendaftaran Umrah Wajib diisi.',
-            'province.required' => 'Kolom [Provinsi] pada Pendaftaran Umrah Wajib diisi.',
-            'city.required' => 'Kolom [Kota] pada Pendaftaran Umrah Wajib diisi.',
-            'subdistrict.required' => 'Kolom [Kecamatan] pada Pendaftaran Umrah Wajib diisi.',
+            'full_name.required' => 'Kolom [Nama Lengkap] pada Pendaftaran Umrah Wajib diisi. Contoh: *Nama Lengkap: Fulan Fulanah*',
+            'gender.required' => 'Kolom [Jenis Kelamin] pada Pendaftaran Umrah Wajib diisi. Contoh: *Jenis Kelamin: Laki-laki*',
+            'birth_place.required' => 'Kolom [Tempat Lahir] pada Pendaftaran Umrah Wajib diisi. Contoh: *Tempat Lahir: Jakarta*',
+            'birth_date.required' => 'Kolom [Tanggal Lahir] pada Pendaftaran Umrah Wajib diisi. Contoh: *Tanggal Lahir: 24 September 2001*',
+            'father_name.required' => 'Kolom [Nama Ayah] pada Pendaftaran Umrah Wajib diisi. Contoh: *Nama Ayah: Fulan*',
+            'mother_name.required' => 'Kolom [Nama Ibu] pada Pendaftaran Umrah Wajib diisi. Contoh: *Nama Ibu: Fulanah*',
+            'profession.required' => 'Kolom [Pekerjaan] pada Pendaftaran Umrah Wajib diisi. Contoh: *Pekerjaan: Pelajar*',
+            'address.required' => 'Kolom [Alamat] pada Pendaftaran Umrah Wajib diisi. Contoh: *Alamat: Jl. Contoh No. 1*',
+            'province.required' => 'Kolom [Provinsi] pada Pendaftaran Umrah Wajib diisi. Contoh: *Provinsi: DKI Jakarta*',
+            'city.required' => 'Kolom [Kota] pada Pendaftaran Umrah Wajib diisi. Contoh: *Kota: Jakarta*',
+            'subdistrict.required' => 'Kolom [Kecamatan] pada Pendaftaran Umrah Wajib diisi. Contoh: *Kecamatan: Cilandak*',
             'umrah_package_id.required' => 'Kolom [Kode Paket Umrah] pada Pendaftaran Umrah Wajib diisi dan berupa Angka. *Contoh: Kode Paket Umrah: 20*',
             //Birth Date Validation
             'birth_date.date_format' => 'Kolom [Tanggal Lahir] harus sesuai dengan format. Contoh: *24 September 2001*.',
             //WhatsApp Number Validation
-            'whatsapp_number.required' => 'Kolom [Nomor HP (WhatsApp)] pada Pendaftaran Umrah Wajib diisi.',
+            'whatsapp_number.required' => 'Kolom [Nomor HP (WhatsApp)] pada Pendaftaran Umrah Wajib diisi. Contoh: *Nomor HP (WhatsApp): 081234567890*',
             'whatsapp_number.integer' => 'Nomor HP (WhatsApp) harus berupa bilangan bulat/angka.',
             'whatsapp_number.regex' => 'Nomor HP (WhatsApp) harus dimulai dengan 08 dan memiliki panjang antara 10 hingga 13 digit setelah 08.',
         ];

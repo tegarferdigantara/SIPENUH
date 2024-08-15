@@ -17,6 +17,7 @@ class ItineraryResource extends JsonResource
         return [
             'id' => $this->id,
             'umrah_package_id' => $this->umrah_package_id,
+            'umrah_package_name' => $this->umrahPackage->name,
             'title' => $this->title,
             'date' => $this->date,
             'activity' => $this->activity

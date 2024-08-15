@@ -2,10 +2,14 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\WhatsAppController;
+use App\Models\ChatbotApiKey;
 use App\Models\Customer;
 use App\Models\UmrahPackage;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -33,7 +37,9 @@ class AppServiceProvider extends ServiceProvider
                 WHEN status = 'CLOSED' THEN 3
                 ELSE 4 -- Default case, jika ada status lain yang tidak terdaftar
             END")->get();
+            $whatsappStatus = (new WhatsAppController)->checkWhatsAppStatus();
 
+            $view->with('whatsappStatus', $whatsappStatus);
             $view->with('umrahPackages', $umrahPackages);
         });
 

@@ -15,13 +15,9 @@ class UmrahPackageController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-    }
-
     public function indexApi()
     {
-        $packages = UmrahPackage::whereNotIn('status', ['CLOSED'])->get();
+        $packages = UmrahPackage::whereNotIn('status', ['CLOSED'])->orderBy('created_at', 'asc')->get();
 
         return (UmrahPackageResource::collection($packages))->response()->setStatusCode(200);
     }
