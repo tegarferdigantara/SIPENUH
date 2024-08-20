@@ -37,7 +37,7 @@
                                 </div>
 
                                 <p class="mb-6 text-base text-body-color dark:text-dark-6">
-                                    “{{ $testimonial->review }} {{ $testimonial->rating }}’’
+                                    “{{ $testimonial->review }}’’
 
                                 </p>
 
