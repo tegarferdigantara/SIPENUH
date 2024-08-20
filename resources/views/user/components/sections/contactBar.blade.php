@@ -53,10 +53,9 @@
                     </div>
                 </div>
             </div>
-            <div class="w-full px-4 lg:w-5/12 xl:w-4/12">
+            {{-- <div class="w-full px-4 lg:w-5/12 xl:w-4/12">
                 <div class="wow fadeInUp rounded-lg bg-white px-8 py-10 shadow-testimonial dark:bg-dark-2 dark:shadow-none sm:px-10 sm:py-12 md:p-[60px] lg:p-10 lg:px-10 lg:py-12 2xl:p-[60px]"
-                    data-wow-delay=".2s
-      ">
+                    data-wow-delay=".2s">
                     <h3 class="mb-8 text-2xl font-semibold text-dark dark:text-white md:text-[28px] md:leading-[1.42]">
                         Send us a Message
                     </h3>
@@ -93,7 +92,7 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </section>
