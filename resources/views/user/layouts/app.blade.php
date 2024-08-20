@@ -32,7 +32,7 @@
     <!-- ====== Back To Top End -->
 
     <!-- ====== Made With Button Start -->
-    <a target="_blank" rel="nofollow noopener"
+    {{-- <a target="_blank" rel="nofollow noopener"
         class="fixed bottom-8 left-4 z-[999] inline-flex items-center gap-[10px] rounded-lg bg-white px-[14px] py-2 shadow-2 dark:bg-dark-2 sm:left-9"
         href="https://tailgrids.com/">
         <span class="text-base font-medium text-dark-3 dark:text-dark-6">
@@ -43,7 +43,7 @@
             <img src="./assets/images/brands/tailgrids.svg" alt="tailgrids" class="dark:hidden" />
             <img src="./assets/images/brands/tailgrids-white.svg" alt="tailgrids" class="hidden dark:block" />
         </span>
-    </a>
+    </a> --}}
     <!-- ====== Made With Button End -->
 
     <!-- ====== All Scripts -->

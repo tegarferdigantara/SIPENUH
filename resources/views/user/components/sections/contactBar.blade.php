@@ -8,10 +8,10 @@
                 <div class="ud-contact-content-wrapper">
                     <div class="ud-contact-title mb-12 lg:mb-[150px]">
                         <span class="mb-6 block text-base font-medium text-dark dark:text-white">
-                            CONTACT US
+                            KONTAK KAMI
                         </span>
                         <h2 class="max-w-[260px] text-[35px] font-semibold leading-[1.14] text-dark dark:text-white">
-                            Let's talk about your problem.
+                            Kami Siap Membantu Anda
                         </h2>
                     </div>
                     <div class="mb-12 flex flex-wrap justify-between lg:mb-0">
@@ -26,10 +26,11 @@
                             </div>
                             <div>
                                 <h5 class="mb-[18px] text-lg font-semibold text-dark dark:text-white">
-                                    Our Location
+                                    Lokasi Kami
                                 </h5>
                                 <p class="text-base text-body-color dark:text-dark-6">
-                                    401 Broadway, 24th Floor, Orchard Cloud View, London
+                                    Jl. Apel, Sungai Jawi Luar, Kec. Pontianak Bar., Kota Pontianak, Kalimantan Barat
+                                    78113
                                 </p>
                             </div>
                         </div>
@@ -42,13 +43,10 @@
                             </div>
                             <div>
                                 <h5 class="mb-[18px] text-lg font-semibold text-dark dark:text-white">
-                                    How Can We Help?
+                                    Butuh Bantuan?
                                 </h5>
                                 <p class="text-base text-body-color dark:text-dark-6">
-                                    info@yourdomain.com
-                                </p>
-                                <p class="mt-1 text-base text-body-color dark:text-dark-6">
-                                    contact@yourdomain.com
+                                    support@assyubbantours.com
                                 </p>
                             </div>
                         </div>

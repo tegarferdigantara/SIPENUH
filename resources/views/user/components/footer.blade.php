@@ -190,11 +190,7 @@
                 <div class="w-full px-4 md:w-1/3 lg:w-1/2">
                     <div class="my-1 flex justify-center md:justify-end">
                         <p class="text-base text-gray-7">
-                            Designed and Developed by
-                            <a href="https://tailgrids.com" rel="nofollow noopner" target="_blank"
-                                class="text-gray-1 hover:underline">
-                                TailGrids and UIdeck
-                            </a>
+                            Assyubban Tour 2024
                         </p>
                     </div>
                 </div>
