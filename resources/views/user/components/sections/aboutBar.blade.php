@@ -22,10 +22,10 @@
                         <p class="mb-10 text-base leading-relaxed text-body-color dark:text-dark-6">
                             Bersama kami, wujudkan umrah impian Anda dengan percaya diri dan ketenangan hati.
                         </p>
-                        <a href="javascript:void(0)"
+                        {{-- <a href="javascript:void(0)"
                             class="inline-flex items-center justify-center rounded-md border border-primary bg-primary px-7 py-3 text-center text-base font-medium text-white hover:border-blue-dark hover:bg-blue-dark">
                             Pelajari Lebih Lanjut
-                        </a>
+                        </a> --}}
                     </div>
                 </div>
 
