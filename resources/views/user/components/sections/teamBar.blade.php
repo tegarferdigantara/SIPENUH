@@ -4,15 +4,16 @@
             <div class="w-full px-4">
                 <div class="mx-auto mb-[60px] max-w-[485px] text-center">
                     <span class="mb-2 block text-lg font-semibold text-primary">
-                        Our Team Members
+                        Tim Kami
                     </span>
                     <h2
                         class="mb-3 text-3xl font-bold leading-[1.2] text-dark dark:text-white sm:text-4xl md:text-[40px]">
-                        Our Creative Team
+                        Tim Pelayanan Assyubban Tour
                     </h2>
                     <p class="text-base text-body-color dark:text-dark-6">
-                        There are many variations of passages of Lorem Ipsum available
-                        but the majority have suffered alteration in some form.
+                        Kami adalah tim yang berdedikasi untuk memberikan layanan terbaik kepada Anda. Kami siap
+                        membantu
+                        Anda dalam merencanakan perjalanan umrah yang tak terlupakan.
                     </p>
                 </div>
             </div>

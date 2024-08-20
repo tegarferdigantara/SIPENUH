@@ -36,6 +36,12 @@
                                 </a>
                             </li>
                             <li class="group relative">
+                                <a href="#testimonials"
+                                    class="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-10">
+                                    Testimoni
+                                </a>
+                            </li>
+                            <li class="group relative">
                                 <a href="#team"
                                     class="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-10">
                                     Tim Kami
@@ -45,12 +51,6 @@
                                 <a href="#contact"
                                     class="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-10">
                                     Kontak Kami
-                                </a>
-                            </li>
-                            <li class="group relative">
-                                <a href="blog-grids.html"
-                                    class="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-10">
-                                    Blog
                                 </a>
                             </li>
                             {{-- <li class="submenu-item group relative">

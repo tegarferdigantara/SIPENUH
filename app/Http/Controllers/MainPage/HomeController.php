@@ -5,7 +5,7 @@ namespace App\Http\Controllers\MainPage;
 use App\Http\Controllers\Controller;
 use App\Models\Faq;
 use App\Models\Testimonial;
-use Illuminate\Http\Request;
+use App\Models\UmrahPackage;
 
 class HomeController extends Controller
 {
@@ -13,6 +13,7 @@ class HomeController extends Controller
     {
         $testimonials = Testimonial::all();
         $faqs = Faq::all();
-        return view('user.pages.home', compact('testimonials', 'faqs'));
+        $umrahPackages = UmrahPackage::where('status', ['ACTIVE'])->get();
+        return view('user.pages.home', compact('testimonials', 'faqs', 'umrahPackages'));
     }
 }
