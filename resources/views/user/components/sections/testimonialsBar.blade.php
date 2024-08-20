@@ -58,40 +58,6 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="swiper-slide">
-                            <div
-                                class="rounded-xl bg-white px-4 py-[30px] shadow-testimonial dark:bg-dark sm:px-[30px]">
-                                <div class="mb-[18px] flex items-center gap-[2px]">
-                                    @for ($i = 1; $i <= 5; $i++)
-                                        @if ($i <= $testimonial->rating)
-                                            <img src="./assets/images/testimonials/icon-star.svg" alt="star icon"
-                                                class="star-filled" />
-                                        @endif
-                                    @endfor
-                                </div>
-
-                                <p class="mb-6 text-base text-body-color dark:text-dark-6">
-                                    “{{ $testimonial->review }} {{ $testimonial->rating }}’’
-
-                                </p>
-
-                                <a href="#" class="flex items-center gap-4">
-                                    <div class="w-[50px] overflow-hidden rounded-full">
-                                        <img src="{{ asset('storage/' . $testimonial->customer->customerDocument->customer_photo) }}"
-                                            alt="{{ $testimonial->customer->full_name }}"
-                                            class="w-[50px] overflow-hidden rounded-full" />
-                                    </div>
-
-                                    <div>
-                                        <h3 class="text-sm font-semibold text-dark dark:text-white">
-                                            {{ $testimonial->customer->full_name }}
-                                        </h3>
-                                        <p class="text-xs text-body-secondary">{{ $testimonial->customer->profession }}
-                                            | Jemaah {{ $testimonial->customer->umrahPackage->name }}</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
                     @endforeach
                 </div>
 
