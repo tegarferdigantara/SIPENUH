@@ -6,23 +6,25 @@
                     <div class="mb-12 max-w-[540px] lg:mb-0">
                         <h2
                             class="mb-5 text-3xl font-bold leading-tight text-dark dark:text-white sm:text-[40px] sm:leading-[1.2]">
-                            Brilliant Toolkit to Build Nextgen Website Faster.
+                            Solusi Terpercaya untuk Perjalanan Umrah yang Berkesan
                         </h2>
-                        <p class="mb-10 text-base leading-relaxed text-body-color dark:text-dark-6">
-                            The main ‘thrust' is to focus on educating attendees on how to
-                            best protect highly vulnerable business applications with
-                            interactive panel discussions and roundtables led by subject
-                            matter experts.
-                            <br />
-                            <br />
-                            The main ‘thrust' is to focus on educating attendees on how to
-                            best protect highly vulnerable business applications with
-                            interactive panel.
+                        <p class="mb-5 text-base leading-relaxed text-body-color dark:text-dark-6">
+                            Assyubban Tour fokus pada edukasi calon jamaah untuk perjalanan umrah yang
+                            optimal. Kami menyediakan:
                         </p>
-
+                        <ul class="mb-10 list-disc pl-5 text-base leading-relaxed text-body-color dark:text-dark-6">
+                            <li>Diskusi interaktif dengan ahli ibadah dan travel umrah</li>
+                            <li>Panduan lengkap aspek spiritual dan praktis umrah</li>
+                            <li>Informasi terkini tentang prosedur dan regulasi</li>
+                            <li>Tips persiapan dan pelaksanaan ibadah yang maksimal</li>
+                            <li>Dukungan penuh untuk pengalaman umrah yang aman dan bermakna</li>
+                        </ul>
+                        <p class="mb-10 text-base leading-relaxed text-body-color dark:text-dark-6">
+                            Bersama kami, wujudkan umrah impian Anda dengan percaya diri dan ketenangan hati.
+                        </p>
                         <a href="javascript:void(0)"
                             class="inline-flex items-center justify-center rounded-md border border-primary bg-primary px-7 py-3 text-center text-base font-medium text-white hover:border-blue-dark hover:bg-blue-dark">
-                            Know More
+                            Pelajari Lebih Lanjut
                         </a>
                     </div>
                 </div>
@@ -115,7 +117,7 @@
     </div>
 </section>
 
-<section class="relative z-10 overflow-hidden bg-primary py-20 lg:py-[115px]">
+{{-- <section class="relative z-10 overflow-hidden bg-primary py-20 lg:py-[115px]">
     <div class="container mx-auto">
         <div class="relative overflow-hidden">
             <div class="-mx-4 flex flex-wrap items-stretch">
@@ -163,4 +165,4 @@
             </svg>
         </span>
     </div>
-</section>
+</section> --}}

@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('testimonials', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('customer_id');
-            $table->text('content');
+            $table->unsignedBigInteger('customer_id')->unique();
+            $table->text('review');
+            $table->tinyInteger('rating')->default(5);
             $table->timestamps();
 
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');

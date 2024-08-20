@@ -101,7 +101,7 @@
 </section>
 
 <!-- ====== Brands Section Start -->
-<section class="pb-20 dark:bg-dark">
+{{-- <section class="pb-20 dark:bg-dark">
     <div class="container px-4">
         <div class="-mx-4 flex flex-wrap items-center justify-center gap-8 xl:gap-11">
             <a href="https://graygrids.com/">
@@ -126,5 +126,5 @@
             </a>
         </div>
     </div>
-</section>
+</section> --}}
 <!-- ====== Brands Section End -->

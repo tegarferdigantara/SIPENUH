@@ -17,12 +17,20 @@
     @include('user.components.sections.pricingBar')
     <!-- ====== Pricing Section End -->
 
+    {{-- Testimonials Section Start --}}
+    @include('user.components.sections.testimonialsBar')
+    {{-- Testimonials Section End --}}
+
+    {{-- Faq Section Start --}}
+    @include('user.components.sections.faqBar')
+    {{-- Faq Section End --}}
+
     <!-- ====== Team Section Start -->
     @include('user.components.sections.teamBar')
     <!-- ====== Team Section End -->
 
     <!-- ====== Blog Section Start -->
-    @include('user.components.sections.blogBar')
+    {{-- @include('user.components.sections.blogBar') --}}
     <!-- ====== Blog Section End -->
 
     <!-- ====== Contact Start ====== -->

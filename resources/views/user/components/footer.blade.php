@@ -7,8 +7,7 @@
                         <img src="assets/images/logo/logo-white.svg" alt="logo" class="max-w-full" />
                     </a>
                     <p class="mb-8 max-w-[270px] text-base text-gray-7">
-                        We create digital experiences for brands and companies by using
-                        technology.
+                        Mewujudkan ibadah umrah dan haji yang nyaman dan bermakna melalui layanan prima.
                     </p>
                     <div class="-mx-3 flex items-center">
                         <a href="javascript:void(0)" class="px-3 text-gray-7 hover:text-white">
@@ -59,13 +58,13 @@
                         <li>
                             <a href="javascript:void(0)"
                                 class="mb-3 inline-block text-base text-gray-7 hover:text-primary">
-                                Features
+                                Paket Tersedia
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)"
                                 class="mb-3 inline-block text-base text-gray-7 hover:text-primary">
-                                About
+                                Tentang Kami
                             </a>
                         </li>
                         <li>
@@ -108,7 +107,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-3/12 xl:w-2/12">
+            {{-- <div class="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-3/12 xl:w-2/12">
                 <div class="mb-10 w-full">
                     <h4 class="mb-9 text-lg font-semibold text-white">
                         Our Products
@@ -140,8 +139,8 @@
                         </li>
                     </ul>
                 </div>
-            </div>
-            <div class="w-full px-4 md:w-2/3 lg:w-6/12 xl:w-3/12">
+            </div> --}}
+            {{-- <div class="w-full px-4 md:w-2/3 lg:w-6/12 xl:w-3/12">
                 <div class="mb-10 w-full">
                     <h4 class="mb-9 text-lg font-semibold text-white">Latest blog</h4>
                     <div class="flex flex-col gap-8">
@@ -163,7 +162,7 @@
                         </a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 
@@ -213,8 +212,7 @@
         </span>
 
         <span class="absolute right-0 top-0 z-[-1]">
-            <svg width="102" height="102" viewBox="0 0 102 102" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
+            <svg width="102" height="102" viewBox="0 0 102 102" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M1.8667 33.1956C2.89765 33.1956 3.7334 34.0318 3.7334 35.0633C3.7334 36.0947 2.89765 36.9309 1.8667 36.9309C0.835744 36.9309 4.50645e-08 36.0947 0 35.0633C-4.50645e-08 34.0318 0.835744 33.1956 1.8667 33.1956Z"
                     fill="white" fill-opacity="0.08"></path>

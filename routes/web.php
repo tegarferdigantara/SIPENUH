@@ -9,6 +9,7 @@ use App\Http\Controllers\CustomerDocumentController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItineraryController;
+use App\Http\Controllers\MainPage\HomeController as MainPageHomeController;
 use App\Http\Controllers\Pdf\ManifestController;
 use App\Http\Controllers\Pdf\RekomController;
 use App\Http\Controllers\ProfileController;
@@ -28,9 +29,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('user.pages.home');
-});
+Route::get('/', [MainPageHomeController::class, 'index'])->name('user.home');
+
 
 Route::prefix('admin')->group(function () {
     Route::middleware('guest')->group(function () {
@@ -52,12 +52,12 @@ Route::prefix('admin')->group(function () {
         Route::put('/faq/{faqId}', [FaqController::class, 'update'])->name('admin.faq.update');
         Route::delete('/faq/{faqId}', [FaqController::class, 'destroy'])->name('admin.faq.destroy');
 
-        Route::get('/testimonial', [TestimonialController::class, 'index'])->name('admin.testimonial.list');
-        Route::get('/testimonial/tambah', [TestimonialController::class, 'create'])->name('admin.testimonial.create');
-        Route::post('/testimonial/tambah', [TestimonialController::class, 'store'])->name('admin.testimonial.store');
-        Route::get('/testimonial/{testimonialId}/edit', [TestimonialController::class, 'edit'])->name('admin.testimonial.edit');
-        Route::put('/testimonial/{testimonialId}', [TestimonialController::class, 'update'])->name('admin.testimonial.update');
-        Route::delete('/testimonial/{testimonialId}', [TestimonialController::class, 'destroy'])->name('admin.testimonial.destroy');
+        Route::get('/testimoni', [TestimonialController::class, 'index'])->name('admin.testimonial.list');
+        Route::get('/testimoni/tambah', [TestimonialController::class, 'create'])->name('admin.testimonial.create');
+        Route::post('/testimoni/tambah', [TestimonialController::class, 'store'])->name('admin.testimonial.store');
+        Route::get('/testimoni/{testimonialId}/edit', [TestimonialController::class, 'edit'])->name('admin.testimonial.edit');
+        Route::put('/testimoni/{testimonialId}', [TestimonialController::class, 'update'])->name('admin.testimonial.update');
+        Route::delete('/testimoni/{testimonialId}', [TestimonialController::class, 'destroy'])->name('admin.testimonial.destroy');
 
         Route::group(['middleware' => ['role:admin']], function () {
             Route::get('/users', [RegisteredUserController::class, 'index'])->name('admin.users.index');
@@ -86,8 +86,8 @@ Route::prefix('admin')->group(function () {
             Route::post('/jemaah-umrah/{customerId}/update-photo', [CustomerDocumentController::class, 'updatePhoto'])->name('admin.customerDocument.update.photo.post');
             Route::post('/jemaah-umrah/rotate-photo/{customerId}/{type}', [CustomerDocumentController::class, 'rotatePhoto'])->name('admin.customerDocument.rotate.photo');
 
+            Route::get('/jemaah-umrah/download/export/{umrahPackageId}', [UmrahPackageController::class, 'exportUmrahData'])->name('download.export.all.data');
             Route::get('/jemaah-umrah/download/manifest/{packageId}', [ManifestController::class, 'generatePdfByPackageId'])->name('download.manifest');
-            Route::get('/jemaah-umrah/download/rekom-by-package-id/{packageId}', [RekomController::class, 'generateRekomByPackageId'])->name('download.rekom.by.packageId');
             Route::get('/jemaah-umrah/download/rekom-by-customer-id/{customerId}', [RekomController::class, 'generateRekomByCustomerId'])->name('download.rekom.by.customerId');
 
             Route::get('/riwayat-penghapusan', [CustomerAuditLogController::class, 'index'])->name('admin.customer.audit.log');

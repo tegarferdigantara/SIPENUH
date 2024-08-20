@@ -1,7 +1,7 @@
 <div class="ud-header absolute left-0 top-0 z-40 flex w-full items-center bg-transparent">
     <div class="container">
         <div class="relative -mx-4 flex items-center justify-between">
-            <div class="w-60 max-w-full px-4">
+            <div class="w-80 max-w-full px-2">
                 <a href="{{ route('admin.dashboard') }}" class="navbar-logo block w-full py-5">
                     <img src="assets/images/logo/logo-white.svg" alt="logo" class="header-logo w-full" />
                 </a>
@@ -26,25 +26,25 @@
                             <li class="group relative">
                                 <a href="#about"
                                     class="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-10">
-                                    About
+                                    Tentang Kami
                                 </a>
                             </li>
                             <li class="group relative">
                                 <a href="#pricing"
                                     class="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-10">
-                                    Pricing
+                                    Paket Tersedia
                                 </a>
                             </li>
                             <li class="group relative">
                                 <a href="#team"
                                     class="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-10">
-                                    Team
+                                    Tim Kami
                                 </a>
                             </li>
                             <li class="group relative">
                                 <a href="#contact"
                                     class="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-10">
-                                    Contact
+                                    Kontak Kami
                                 </a>
                             </li>
                             <li class="group relative">
@@ -53,7 +53,7 @@
                                     Blog
                                 </a>
                             </li>
-                            <li class="submenu-item group relative">
+                            {{-- <li class="submenu-item group relative">
                                 <a href="javascript:void(0)"
                                     class="relative mx-8 flex items-center justify-between py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-8 lg:mr-0 lg:inline-flex lg:py-6 lg:pl-0 lg:pr-4 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-10">
                                     Pages
@@ -99,7 +99,7 @@
                                         404 Page
                                     </a>
                                 </div>
-                            </li>
+                            </li> --}}
                         </ul>
                     </nav>
                 </div>
@@ -146,14 +146,14 @@
                         </span>
                     </label>
                     <div class="hidden sm:flex">
-                        <a href="signin.html"
+                        {{-- <a href="signin.html"
                             class="loginBtn px-[22px] py-2 text-base font-medium text-white hover:opacity-70">
                             Sign In
                         </a>
                         <a href="signup.html"
                             class="signUpBtn rounded-md bg-white bg-opacity-20 px-6 py-2 text-base font-medium text-white duration-300 ease-in-out hover:bg-opacity-100 hover:text-dark">
                             Sign Up
-                        </a>
+                        </a> --}}
                     </div>
                 </div>
             </div>

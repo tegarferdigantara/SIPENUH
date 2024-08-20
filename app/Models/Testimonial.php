@@ -14,7 +14,8 @@ class Testimonial extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'customer_id',
-        'content'
+        'review',
+        'rating',
     ];
     public $timestamps = true;
     public $incrementing = true;
