@@ -8,7 +8,7 @@
     <title>
         Assyubban Tour & Travel
     </title>
-    <link rel="shortcut icon" href="{{ asset('assets/favicon.ico') }}" type="image/x-icon" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="{{ asset('assets/css/swiper-bundle.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/tailwind.css') }}" />
