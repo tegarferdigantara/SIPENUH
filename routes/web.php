@@ -59,6 +59,11 @@ Route::prefix('admin')->group(function () {
         Route::put('/testimoni/{testimonialId}', [TestimonialController::class, 'update'])->name('admin.testimonial.update');
         Route::delete('/testimoni/{testimonialId}', [TestimonialController::class, 'destroy'])->name('admin.testimonial.destroy');
 
+        Route::get('/pesan-siaran', [WhatsAppController::class, 'broadcast'])->name('admin.message.broadcast.index');
+        Route::post('/pesan-siaran', [WhatsAppController::class, 'broadcastStore'])->name('admin.message.broadcast.store');
+        Route::get('/pesan-tunggal', [WhatsAppController::class, 'single'])->name('admin.message.single.index');
+        Route::post('/pesan-tunggal', [WhatsAppController::class, 'singleStore'])->name('admin.message.single.store');
+
         Route::group(['middleware' => ['role:admin']], function () {
             Route::get('/users', [RegisteredUserController::class, 'index'])->name('admin.users.index');
             Route::get('/users/tambah', [RegisteredUserController::class, 'create'])->name('admin.users.create');
@@ -66,16 +71,9 @@ Route::prefix('admin')->group(function () {
             Route::get('/users/{userId}/edit', [RegisteredUserController::class, 'edit'])->name('admin.users.edit');
             Route::put('/users/{userId}/update', [RegisteredUserController::class, 'update'])->name('admin.users.update');
             Route::delete('/users/{userId}/delete', [RegisteredUserController::class, 'destroy'])->name('admin.users.destroy');
-
-            Route::get('/pesan-siaran', [WhatsAppController::class, 'broadcast'])->name('admin.message.broadcast.index');
-            Route::post('/pesan-siaran', [WhatsAppController::class, 'broadcastStore'])->name('admin.message.broadcast.store');
-            Route::get('/pesan-tunggal', [WhatsAppController::class, 'single'])->name('admin.message.single.index');
-            Route::post('/pesan-tunggal', [WhatsAppController::class, 'singleStore'])->name('admin.message.single.store');
         });
 
         Route::group(['middleware' => ['role:manager']], function () {
-
-
             Route::get('/jemaah-umrah', [CustomerController::class, 'index'])->name('admin.customer.list.all');
             Route::get('/jemaah-umrah/{packageId}', [CustomerController::class, 'showByPackage'])->name('admin.customer.list.by.package');
             Route::get('/jemaah-umrah/{packageId}/{customerId}', [CustomerController::class, 'showCustomer'])->name('admin.customer.detail.by.package');
