@@ -130,7 +130,7 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
                                                 <input type="email" placeholder="Enter your email" name="email"
                                                     id="email" value="{{ old('email') }}"
                                                     class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                                                    required
+                                                    required autofocus
                                                     pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" />
 
                                                 <span class="absolute right-4 top-4">

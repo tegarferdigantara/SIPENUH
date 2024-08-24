@@ -40,7 +40,7 @@
                                     {{ $faq['question'] }}
                                 </h3>
                                 <p class="text-base text-body-color dark:text-dark-6">
-                                    {{ $faq['answer'] }}
+                                    {!! $faq['answer'] !!}
                                 </p>
                             </div>
                         </div>

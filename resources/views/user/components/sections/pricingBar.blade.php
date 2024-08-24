@@ -40,7 +40,7 @@
                                         <b>{{ $package->destination }}</b>
                                     </li>
                                     <li class="text-body-color dark:text-dark-6">Fasilitas:</li>
-                                    <li class="text-body-color dark:text-dark-6">{{ $package->facility }}</li>
+                                    <li class="text-body-color dark:text-dark-6">{!! $package->facility !!}</li>
                                 </ul>
                                 <a href="http://wa.me/{{ env('CHATBOT_WHATSAPP_NUMBER') }}" target="_blank"
                                     class="block w-full rounded-md bg-primary px-4 py-3 text-center text-base font-medium text-white transition hover:bg-blue-dark">
