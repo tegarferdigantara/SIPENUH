@@ -23,7 +23,7 @@
                 <div
                     class="group mb-8 rounded-xl bg-white px-5 pb-10 pt-12 shadow-testimonial dark:bg-dark dark:shadow-none">
                     <div class="relative z-10 mx-auto mb-5 h-[120px] w-[120px]">
-                        <img src="./assets/images/team/team-01.png" alt="team image"
+                        <img src="{{ asset('assets/images/user/user-01.png') }}" alt="team image"
                             class="h-[120px] w-[120px] rounded-full" />
                         <span
                             class="absolute bottom-0 left-0 -z-10 h-10 w-10 rounded-full bg-secondary opacity-0 transition-all group-hover:opacity-100"></span>
@@ -140,10 +140,10 @@
                     </div>
                     <div class="text-center">
                         <h4 class="mb-1 text-lg font-semibold text-dark dark:text-white">
-                            Melissa Tatcher
+                            Husni Mubarok, M.Pd
                         </h4>
                         <p class="mb-5 text-sm text-body-color dark:text-dark-6">
-                            Marketing Expert
+                            Manajer
                         </p>
                         <div class="flex items-center justify-center gap-5">
                             <a href="javascript:void(0)" class="text-dark-6 hover:text-primary">
@@ -184,8 +184,8 @@
                 <div
                     class="group mb-8 rounded-xl bg-white px-5 pb-10 pt-12 shadow-testimonial dark:bg-dark dark:shadow-none">
                     <div class="relative z-10 mx-auto mb-5 h-[120px] w-[120px]">
-                        <img src="https://cdn.tailgrids.com/1.0/assets/images/team/image-07/image-02.png"
-                            alt="team image" class="h-[120px] w-[120px] rounded-full" />
+                        <img src="{{ asset('assets/images/user/user-01.png') }}" alt="team image"
+                            class="h-[120px] w-[120px] rounded-full" />
                         <span
                             class="absolute bottom-0 left-0 -z-10 h-10 w-10 rounded-full bg-secondary opacity-0 transition-all group-hover:opacity-100"></span>
                         <span class="absolute right-0 top-0 -z-10 opacity-0 transition-all group-hover:opacity-100">
@@ -247,10 +247,10 @@
                     </div>
                     <div class="text-center">
                         <h4 class="mb-1 text-lg font-semibold text-dark dark:text-white">
-                            Stuard Ferrel
+                            Muhammad Kholilurohim
                         </h4>
                         <p class="mb-5 text-sm text-body-color dark:text-dark-6">
-                            Digital Marketer
+                            Admin
                         </p>
                         <div class="flex items-center justify-center gap-5">
                             <a href="javascript:void(0)" class="text-dark-6 hover:text-primary">
@@ -291,8 +291,8 @@
                 <div
                     class="group mb-8 rounded-xl bg-white px-5 pb-10 pt-12 shadow-testimonial dark:bg-dark dark:shadow-none">
                     <div class="relative z-10 mx-auto mb-5 h-[120px] w-[120px]">
-                        <img src="https://cdn.tailgrids.com/1.0/assets/images/team/image-07/image-03.png"
-                            alt="team image" class="h-[120px] w-[120px] rounded-full" />
+                        <img src="{{ asset('assets/images/user/user-01.png') }}" alt="team image"
+                            class="h-[120px] w-[120px] rounded-full" />
                         <span
                             class="absolute bottom-0 left-0 -z-10 h-10 w-10 rounded-full bg-secondary opacity-0 transition-all group-hover:opacity-100"></span>
                         <span class="absolute right-0 top-0 -z-10 opacity-0 transition-all group-hover:opacity-100">
@@ -354,10 +354,10 @@
                     </div>
                     <div class="text-center">
                         <h4 class="mb-1 text-lg font-semibold text-dark dark:text-white">
-                            Eva Hudson
+                            Ferri Firmansyah
                         </h4>
                         <p class="mb-5 text-sm text-body-color dark:text-dark-6">
-                            Creative Designer
+                            Marketing
                         </p>
                         <div class="flex items-center justify-center gap-5">
                             <a href="javascript:void(0)" class="text-dark-6 hover:text-primary">
@@ -394,7 +394,7 @@
                     </div>
                 </div>
             </div>
-            <div class="w-full px-4 sm:w-1/2 lg:w-1/4 xl:w-1/4">
+            {{-- <div class="w-full px-4 sm:w-1/2 lg:w-1/4 xl:w-1/4">
                 <div
                     class="group mb-8 rounded-xl bg-white px-5 pb-10 pt-12 shadow-testimonial dark:bg-dark dark:shadow-none">
                     <div class="relative z-10 mx-auto mb-5 h-[120px] w-[120px]">
@@ -500,7 +500,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </section>
