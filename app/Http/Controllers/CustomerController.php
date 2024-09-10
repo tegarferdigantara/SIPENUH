@@ -28,15 +28,6 @@ class CustomerController extends Controller
 
         return view('admin.pages.customer-manage.list', compact('customers'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -313,8 +304,8 @@ class CustomerController extends Controller
         $year = date('Y');
         $fullName = $customer->full_name;
         $genderInitial = strtoupper(substr($customer->gender, 0, 1));
-        $motherInitial = strtoupper(substr($customer->mother_name, 0, 2));
-        $fatherInitial = strtoupper(substr($customer->father_name, 0, 2));
+        $motherInitial = strtoupper(substr($customer->mother_name, 0, 1));
+        $fatherInitial = strtoupper(substr($customer->father_name, 0, 1));
         $cityInitial = strtoupper(substr($customer->birth_place, 0, 1));
         $packageId = $customer->umrah_package_id;
         $nameInitials = '';
